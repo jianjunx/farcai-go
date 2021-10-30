@@ -1,0 +1,22 @@
+# HTTP Server
+[server]
+	Address     = ":3100"
+	ServerRoot  = "public"
+	ServerAgent = "farcai"
+	LogPath     = "/tmp/log/farcai/server"
+
+# Logger.
+[logger]
+    Path        = "/tmp/log/farcai"
+    Level       = "all"
+    Stdout      = true
+
+# Template.
+[viewer]
+    Path        = "template"
+    DefaultFile = "index.html"
+    Delimiters  =  ["{{", "}}"]
+
+# dynamodb
+[dynamodb]
+    region = "us-west-1"
