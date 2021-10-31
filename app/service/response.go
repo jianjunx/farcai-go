@@ -11,11 +11,11 @@ func ErrorHandler(r *ghttp.Request, err error) {
 	if v, ok := err.(gvalid.Error); ok {
 		r.Response.WriteJsonExit(model.Response{
 			Error: v.Error(),
-			Code:  1,
+			Code:  0,
 		})
 	}
 	r.Response.WriteJsonExit(model.Response{
 		Error: err.Error(),
-		Code:  1,
+		Code:  0,
 	})
 }

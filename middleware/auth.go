@@ -1,10 +1,8 @@
 package middleware
 
 import (
-	"errors"
-	"farcai-go/app/service"
+	"farcai-go/app/model"
 	"farcai-go/library/jwt"
-	"net/http"
 
 	"github.com/gogf/gf/net/ghttp"
 )
@@ -12,14 +10,18 @@ import (
 func MiddlewareAuth(r *ghttp.Request) {
 	authToken := r.Header.Get("Authorization")
 	if authToken == "" {
-		r.Response.WriteStatus(http.StatusForbidden)
-		service.ErrorHandler(r, errors.New("token为空"))
+		r.Response.WriteJsonExit(model.Response{
+			Error: "token为空",
+			Code:  403,
+		})
 		return
 	}
 	token, claims, err := jwt.ParseToken(authToken)
 	if err != nil || !token.Valid {
-		r.Response.WriteStatus(http.StatusForbidden)
-		service.ErrorHandler(r, errors.New("身份认证失败"))
+		r.Response.WriteJsonExit(model.Response{
+			Error: "身份认证失败",
+			Code:  403,
+		})
 		return
 	}
 	r.SetCtxVar("UserName", claims.UserName)

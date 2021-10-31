@@ -11,7 +11,7 @@ type UserItem struct {
 	UserName string `dynamo:"user_name" json:"userName"`
 	Avatar   string `dynamp:"avatar" json:"avatar"`
 	Passwd   string `dynamo:"passwd" json:"-"`
-	CreateAt string `dynamo:"create_at" json:"createAt"`
+	CreateAt string `dynamo:"create_at" json:"-"`
 }
 
 type RegisterReq struct {
