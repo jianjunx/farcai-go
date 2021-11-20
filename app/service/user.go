@@ -49,3 +49,15 @@ func (*userService) Login(req *model.LoginReq) (interface{}, error) {
 	}
 	return &model.LoginResp{Token: token, UserInfo: users[0]}, nil
 }
+
+func (*userService) GetUserInfo(userName string) (*model.UserItem, error) {
+	users := []model.UserItem{}
+	err := dao.User.GetUserItem(userName, &users)
+	if err != nil {
+		return nil, err
+	}
+	if len(users) == 0 {
+		return nil, errors.New("用户不存在")
+	}
+	return &users[0], nil
+}

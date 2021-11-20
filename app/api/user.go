@@ -34,3 +34,16 @@ func (*userApi) Login(r *ghttp.Request) {
 	}
 	r.Response.WriteJsonExit(model.Response{Code: 200, Data: resp})
 }
+
+func (*userApi) GetUserInfo(r *ghttp.Request) {
+	userName := r.GetCtxVar("UserName")
+	user, err := service.User.GetUserInfo(userName.String())
+	if err != nil {
+		service.ErrorHandler(r, err)
+		return
+	}
+	r.Response.WriteJsonExit(model.Response{
+		Code: 200,
+		Data: user,
+	})
+}
