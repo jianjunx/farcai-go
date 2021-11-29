@@ -26,4 +26,6 @@ func init() {
 		group.GET("/category", api.Category.GetCategorys)
 
 	})
+	// html
+	s.BindHandler("/", api.Html.Home)
 }

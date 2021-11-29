@@ -1,0 +1,271 @@
+/* RESET CSS */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+menu,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section {
+  display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+  display: none;
+}
+body {
+  line-height: 1;
+}
+menu,
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  background: #fff;
+  backdrop-filter: saturate(180%) blur(0.4rem);
+  background-color: rgba(255, 255, 255, 0.55);
+  border-bottom: 1px solid #f1f1f1;
+  z-index: 99;
+  top: 0;
+}
+.header-wrap {
+  width: 990px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.header-left,
+.header-right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.header-wrap h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+.header-wrap a {
+  text-decoration: none;
+  color: #333;
+}
+.header-nav {
+  display: flex;
+  margin-left: 20px;
+}
+.header-nav li {
+  margin-left: 20px;
+}
+.login-btn {
+  border: 0;
+  background-color: cadetblue;
+  color: #fff;
+  width: 80px;
+  height: 30px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.login-end {
+  position: relative;
+  cursor: pointer;
+}
+.login-drop {
+  width: 120px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: none;
+  background: #fff;
+  position: absolute;
+  border: 1px solid #000;
+  top: 36px;
+  left: 0;
+  transition: all .3s;
+}
+.login-end:hover .login-drop {
+  display: block;
+}
+/* CONTAINER */
+.container {
+  display: flex;
+  width: 990px;
+  margin: 0 auto;
+  margin-top: 60px;
+  padding: 20px 0;
+}
+/* PERSONAL */
+.personal {
+  width: 230px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+.personal-box {
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.personal-avatar {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  width: 100px;
+  border-radius: 8px;
+}
+.personal-name {
+  text-align: center;
+  margin-top: 10px;
+}
+.personal-desc {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #999;
+}
+.personal-action {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.personal-action li {
+  width: 50%;
+}
+.personal-action a {
+  color: #666;
+  font-size: 14px;
+  text-decoration: none;
+  line-height: 30px;
+  margin-left: 20px;
+}
+.gap-dashed {
+  display: inline-block;
+  width: 100%;
+  height: 0;
+  border-top: 1px dashed #999;
+}
+.gap-solid {
+  display: inline-block;
+  width: 100%;
+  height: 0;
+  border-top: 1px solid #f1f1f1;
+}
+/* FOOTER */
+footer {
+  width: 100%;
+  text-align: center;
+}

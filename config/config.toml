@@ -15,8 +15,19 @@
 [viewer]
     Path        = "template"
     DefaultFile = "index.html"
-    Delimiters  =  ["{{", "}}"]
-
+    Delimiters  =  ["${", "}"]
+    AutoEncode = true
+    [viewer.Data]
+        Title = "Value1"
+        Description = "Value2"
+        Navigation = ["首页","/", "关于","/about"]
+        Github = "https://github.com/jianjunx"
+        Gitee = "https://gitee.com/JianJunXie"
+        Zhihu = "/"
+        Weibo = "https://weibo.com/autoshun"
+        Avatar = "https://jianjun-1251280787.cos.ap-nanjing.myqcloud.com/assets/avatar_mini.png"
+        UserName = "JJ Xie"
+        UserDesc = "天上白玉京,十二楼五城 仙人抚我顶,结发受长生"
 # dynamodb
 [dynamodb]
     region = "us-west-1"
