@@ -12,16 +12,31 @@
     <header class="header">
       <input class="header-input" placeholder="请输入标题..." type="text" />
       <div class="header-action">
-        <div class="header-category">
+        <!-- <div class="header-category">
           <label for="category"> 分类: </label>
           <select id="category">
             ${range $index, $elem := .categorys}
             <option value="${$elem.CategoryID}">${$elem.CategoryName}</option>
             ${end}
           </select>
+        </div> -->
+        <button class="save-btn">保存</button>
+        <div class="publish">
+          <button class="publish-show">发布</button>
+          <div class="publish-drop">
+            <span class="publish-close">×</span>
+            <h1 class="category-label">分类：</h1>
+            <ul class="category">
+              ${range $index, $elem := .categorys}
+              <li value="${$elem.CategoryID}">${$elem.CategoryName}</li>
+              ${end}
+            </ul>
+            <div class="publish-action">
+              <span class="publish-tip"></span>
+              <button class="publish-btn">发布</button>
+            </div>
+          </div>
         </div>
-        <button>保存</button>
-        <button>发布</button>
       </div>
     </header>
     <div id="editormd"></div>
@@ -29,7 +44,7 @@
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/editor-md/1.5.0/editormd.min.js"></script>
   <script>
-    var CNDURL = "${.CdnURL}"
+    var CNDURL = "${.CdnURL}";
   </script>
   <script src="/resource/js/writing.js"></script>
 </html>
