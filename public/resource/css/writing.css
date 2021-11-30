@@ -140,6 +140,12 @@ table {
   box-sizing: border-box;
 }
 .header-input {
+  width: calc(100% - 390px);
+  border: 0;
+  outline: none;
+  color: #999;
+  font-size: 20px;
+  padding-left: 20px;
 }
 .header-action {
   display: flex;
@@ -154,17 +160,19 @@ table {
   cursor: pointer;
   margin-left: 10px;
 }
-.header-category {
-}
 .header-category select {
-  width: 100px;
+  outline: none;
+  width: 120px;
   height: 30px;
   border: 0;
   background-color: #f1f1f1;
   color: #999;
 }
-.header-category option {
+.header-category select option {
   font-size: 14px;
   color: #999;
   padding: 10px;
+}
+#editormd {
+  margin: 0;
 }
