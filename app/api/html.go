@@ -16,3 +16,7 @@ func (*htmlApi) Home(r *ghttp.Request) {
 		"name": "JJX",
 	})
 }
+
+func (*htmlApi) Writing(r *ghttp.Request) {
+	r.Response.WriteTpl("writing.html", g.Map{"id": 1})
+}

@@ -28,4 +28,5 @@ func init() {
 	})
 	// html
 	s.BindHandler("/", api.Html.Home)
+	s.BindHandler("/writing", api.Html.Writing)
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/resource/css/editormd.min.css" />
+    <link rel="stylesheet" href="/resource/css/writing.css" />
+    <title>写作 - ${.Title}</title>
+  </head>
+  <body>
+    <header class="header">
+      <input class="header-input" type="text" />
+      <div class="header-action">
+        <div class="header-category">
+          <label for="category"> 分类 </label>
+          <select id="category">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <button>保存</button>
+        <button>发布</button>
+      </div>
+    </header>
+    <div id="editormd" style="width: 90%; height: 640px"></div>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/editor-md/1.5.0/editormd.min.js"></script>
+  <script>
+    var mdEditor;
+    $(function () {
+      mdEditor = editormd("editormd", {
+        width: "100%",
+        height: 640,
+        syncScrolling: "single",
+        path: "${.CdnURL}/editor-md/lib/",
+      });
+    });
+  </script>
+</html>
