@@ -24,6 +24,12 @@ func init() {
 		group.POST("/category", api.Category.AddCategory)
 		// 获取分类列表
 		group.GET("/category", api.Category.GetCategorys)
+		// 添加文章
+		group.POST("/article", api.Article.AddArticle)
+		// 更新文章
+		group.PUT("/article", api.Article.UpdateArticle)
+		// 删除文章
+		group.DELETE("/article/:id", api.Article.DeleteArticle)
 
 	})
 	// html
