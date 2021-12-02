@@ -29,6 +29,8 @@ func init() {
 		group.POST("/article", api.Article.AddArticle)
 		// 更新文章
 		group.PUT("/article", api.Article.UpdateArticle)
+		// 根据ID查询文章
+		group.GET("/article/:id", api.Article.GetArticle)
 		// 删除文章
 		group.DELETE("/article/:id", api.Article.DeleteArticle)
 		// 上传文件

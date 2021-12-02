@@ -46,9 +46,9 @@ func (*articleDao) GetArticlePages(articles *[]model.ArticleItem, categoryId, pa
 }
 
 // 根据id获取文章
-func (*articleDao) GetArticleItem(articleItem *model.ArticleItem, articleId int) error {
+func (*articleDao) GetArticleItem(articleItem *[]model.ArticleItem, articleId int64) error {
 	table := dynamodb.ArticleTable()
-	return table.Get("article_id", articleId).One(dynamo.AWSEncoding(articleItem))
+	return table.Scan().Filter("'article_id' = ?", articleId).All(articleItem)
 }
 
 // 修改添加文章

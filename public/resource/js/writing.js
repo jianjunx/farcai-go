@@ -4,14 +4,23 @@ var AUTO_SAVE_TIME = 5000; // 自动保存时间
 var cos = null;
 var MdEditor = null;
 var currentCategory;
+var headInput = null;
+var ArticleItem = {};
+
+function setAjaxToken(xhr) {
+  xhr.setRequestHeader("Authorization", localStorage.getItem("AUTH_TOKEN"));
+}
 function initEditor() {
+  // 取默认标题
+  headInput.val(ArticleItem.title);
+  // 初始化编辑器
   MdEditor = editormd("editormd", {
     width: "99.5%",
     height: window.innerHeight - 78,
     syncScrolling: "single",
     path: "/resource/lib/",
     placeholder: "",
-    appendMarkdown: window.localStorage.getItem(CONTENT_KEY) || "",
+    appendMarkdown: ArticleItem.markdown,
     imageUpload: true,
     imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
     // imageUploadURL: "/api/v1/uploadfile",
@@ -37,6 +46,7 @@ function uploadImage(file, cb) {
     }
   );
 }
+
 function initCOS() {
   cos = new COS({
     getAuthorization: function (options, callback) {
@@ -60,22 +70,36 @@ function initCOS() {
           };
           callback(params);
         },
-        beforeSend: function (xhr) {
-          xhr.setRequestHeader(
-            "Authorization",
-            localStorage.getItem("AUTH_TOKEN")
-          );
-        },
+        beforeSend: setAjaxToken,
       });
     },
   });
 }
 
+function getArticleItem(id) {
+  $.ajax({
+    url: "/api/v1/article/" + id,
+    type: "GET",
+    contentType: "application/json",
+    success: function (res) {
+      if (res.code == !200) return alert(res.error);
+      ArticleItem = res.data || {};
+      initEditor();
+    },
+    beforeSend: setAjaxToken,
+  });
+}
+
 function initCache() {
-  var title = window.localStorage.getItem(TITLE_KEY);
-  var headInput = $(".header-input");
-  // 取默认标题
-  headInput.val(title);
+  headInput = $(".header-input");
+  var query = new URLSearchParams(location.search);
+  var _id = query.get("id");
+  if (_id) return getArticleItem(_id);
+  // 取本地缓存
+  ArticleItem.title = window.localStorage.getItem(TITLE_KEY);
+  ArticleItem.markdown = window.localStorage.getItem(CONTENT_KEY) || "";
+  // initEditor
+  initEditor();
   // 自动保存
   setInterval(() => {}, AUTO_SAVE_TIME);
 }
@@ -88,12 +112,25 @@ function saveHandler() {
 // 发布
 function publishHandler() {
   if (!currentCategory) return $(".publish-tip").text("请选择分类");
+  ArticleItem.title = headInput.val();
+  ArticleItem.markdown = MdEditor.getMarkdown();
+  ArticleItem.categoryId = currentCategory
+
+  $.ajax({
+    url: "/api/v1/article",
+    type: ArticleItem.articleId ? "PUT" : "POST",
+    contentType: "application/json",
+    data: JSON.stringify(ArticleItem),
+    success: function (res) {
+      if (res.code == !200) return alert(res.error);
+      ArticleItem = res.data || {};
+    },
+    beforeSend: setAjaxToken,
+  });
 }
 
 $(function () {
   initCOS();
-  // initEditor
-  initEditor();
   // 初始化缓存
   initCache();
   // 保存

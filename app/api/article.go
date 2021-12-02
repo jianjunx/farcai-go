@@ -45,6 +45,18 @@ func (*articleApi) UpdateArticle(r *ghttp.Request) {
 	})
 }
 
+func (*articleApi) GetArticle(r *ghttp.Request) {
+	article, err := service.Article.GetArticleItem(r.GetInt64("id"))
+	if err != nil {
+		service.ErrorHandler(r, err)
+		return
+	}
+	r.Response.WriteJsonExit(model.Response{
+		Code: 200,
+		Data: article,
+	})
+}
+
 func (*articleApi) DeleteArticle(r *ghttp.Request) {
 	err := service.Article.DeleteArticle(r.GetInt64("id"))
 	if err != nil {
