@@ -15,6 +15,5 @@ type ArticleItem struct {
 }
 
 type ArticleItemSimpl struct {
-	ArticleID  int64 `dynamo:"article_id" json:"articleId"`
-	CategoryID int64 `dynamo:"category_id" json:"categoryId"`
+	ArticleID int64 `dynamo:"article_id" json:"articleId"`
 }

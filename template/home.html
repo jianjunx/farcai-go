@@ -1,2 +1,32 @@
 ${include "layout/personal.html" .}
-<div>Name:${.name}</div>
+<div class="content">
+  <ul>
+    ${range $index, $elem := .articles}
+    <li>
+      <a href="/p/${$elem.ArticleID}.html"><h2>${$elem.Title}</h2></a>
+      <p></p>
+      <div>
+        <span>作者：${$elem.UserName}</span>
+        <span>分类：${$elem.Category.CategoryName}</span>
+        <span>发布：${$elem.CreateAt | date "Y-m-d"}</span>
+        <span>查看：${$elem.ViewCount}</span>
+      </div>
+    </li>
+    ${end}
+  </ul>
+
+  ${if lt 10 .total}
+  <div>
+    <span>${.total}</span>
+    <ul>
+      ${if gt .page 1}
+      <li>上一页</li>
+      ${end} ${range $index, $elem := .pages}
+      <li value="${$elem}">${$elem}</li>
+      ${end} ${if .pageEnd}
+      <li>下一页</li>
+      ${end}
+    </ul>
+  </div>
+  ${end}
+</div>

@@ -3,6 +3,7 @@ package dao
 import (
 	"farcai-go/app/model"
 	"farcai-go/library/dynamodb"
+	"fmt"
 	"sync"
 
 	"github.com/guregu/dynamo"
@@ -15,17 +16,17 @@ type articleDao struct{}
 // 分页列表
 func (*articleDao) GetArticlePages(articles *[]model.ArticleItem, categoryId, page int64) (total int64, err error) {
 	table := dynamodb.ArticleTable()
-	scan := table.Scan()
-	if categoryId != 0 {
-		scan = table.Scan().Filter("'category_id' = ?", categoryId)
-	}
 	var ws sync.WaitGroup
 	ws.Add(2)
 	// 在协程中获取列表
 	go func() {
 		defer ws.Done()
+		scan := table.Scan()
+		if categoryId != 0 {
+			scan = table.Scan().Filter("'category_id' = ?", categoryId)
+		}
 		var size int64 = 10
-		if page == 1 {
+		if page <= 1 {
 			scan.Limit(size).All(articles)
 			return
 		}
@@ -39,8 +40,15 @@ func (*articleDao) GetArticlePages(articles *[]model.ArticleItem, categoryId, pa
 	// 获取总数
 	go func() {
 		defer ws.Done()
+		scan := table.Scan()
+		if categoryId != 0 {
+			scan = table.Scan().Filter("'category_id' = ?", categoryId)
+		}
 		total, err = scan.Count()
 	}()
+	if err != nil {
+		fmt.Println("err", err.Error())
+	}
 	ws.Wait()
 	return total, err
 }
@@ -48,7 +56,7 @@ func (*articleDao) GetArticlePages(articles *[]model.ArticleItem, categoryId, pa
 // 根据id获取文章
 func (*articleDao) GetArticleItem(articleItem *model.ArticleItem, articleId int64) error {
 	table := dynamodb.ArticleTable()
-	return table.Get("article_id", articleId).One(dynamo.AWSEncoding(articleItem))
+	return table.Get("article_id", articleId).One(articleItem)
 }
 
 // 修改添加文章
