@@ -1,6 +1,7 @@
 var CONTENT_KEY = "CACHE_CONTENT"; // 编辑器内容缓存key
 var TITLE_KEY = "CACHE_TITLE"; // 标题缓存key
 var AUTO_SAVE_TIME = 5000; // 自动保存时间
+var cos = null;
 var MdEditor = null;
 var currentCategory;
 function initEditor() {
@@ -8,9 +9,65 @@ function initEditor() {
     width: "99.5%",
     height: window.innerHeight - 78,
     syncScrolling: "single",
-    path: CNDURL + "/editor-md/lib/",
+    path: "/resource/lib/",
     placeholder: "",
     appendMarkdown: window.localStorage.getItem(CONTENT_KEY) || "",
+    imageUpload: true,
+    imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+    // imageUploadURL: "/api/v1/uploadfile",
+    imageUploadCalback: function (files, cb) {
+      uploadImage(files[0], cb);
+    },
+  });
+}
+function uploadImage(file, cb) {
+  cos.putObject(
+    {
+      Bucket: COS_BUCKET /* 必须 */,
+      Region: COS_REGION /* 存储桶所在地域，必须字段 */,
+      Key: COS_PATH + "/" + Date.now() + "_" + file.name /* 必须 */,
+      StorageClass: "STANDARD",
+      Body: file, // 上传文件对象
+      onProgress: function (progressData) {
+        console.log(JSON.stringify(progressData));
+      },
+    },
+    function (err, data) {
+      if (!err && data.statusCode == 200) cb("//" + data.Location);
+    }
+  );
+}
+function initCOS() {
+  cos = new COS({
+    getAuthorization: function (options, callback) {
+      // 异步获取临时密钥
+      $.ajax({
+        url: "/api/v1/credentials/cos",
+        type: "GET",
+        contentType: "application/json",
+        success: function (res) {
+          if (res.code == !200) return alert(res.error);
+          var data = res.data || {};
+          var credentials = data.Credentials || {};
+          console.log("data", data);
+          var params = {
+            TmpSecretId: credentials.TmpSecretId,
+            TmpSecretKey: credentials.TmpSecretKey,
+            SecurityToken: credentials.Token,
+            StartTime: data.StartTime, // 时间戳，单位秒，如：1580000000
+            ExpiredTime: data.ExpiredTime, // 时间戳，单位秒，如：1580000000
+            ScopeLimit: true, // 细粒度控制权限需要设为 true，会限制密钥只在相同请求时重复使用
+          };
+          callback(params);
+        },
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader(
+            "Authorization",
+            localStorage.getItem("AUTH_TOKEN")
+          );
+        },
+      });
+    },
   });
 }
 
@@ -34,6 +91,7 @@ function publishHandler() {
 }
 
 $(function () {
+  initCOS();
   // initEditor
   initEditor();
   // 初始化缓存

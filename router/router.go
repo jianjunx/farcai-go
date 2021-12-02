@@ -16,6 +16,7 @@ func init() {
 		group.POST("/signup", api.User.Register)
 		// 登录
 		group.POST("/login", api.User.Login)
+
 		// 认证中间件
 		group.Middleware(middleware.MiddlewareAuth)
 		// 获取用户信息
@@ -30,7 +31,8 @@ func init() {
 		group.PUT("/article", api.Article.UpdateArticle)
 		// 删除文章
 		group.DELETE("/article/:id", api.Article.DeleteArticle)
-
+		// 上传文件
+		group.GET("/credentials/cos", api.Assets.COSCredentials)
 	})
 	// html
 	s.BindHandler("/", api.Html.Home)

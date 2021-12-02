@@ -225,3 +225,10 @@ table {
   color: red;
   font-size: 12px;
 }
+.uploadfile-box {
+  position: absolute;
+  width: 90px;
+  height: 40px;
+  z-index: 999;
+  top: 0;
+}

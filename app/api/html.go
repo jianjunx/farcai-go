@@ -25,12 +25,18 @@ func (*htmlApi) Writing(r *ghttp.Request) {
 		service.ErrorHandler(r, err)
 		return
 	}
-	r.Response.WriteTpl("writing.html", g.Map{"id": 1, "categorys": categorys})
+	r.Response.WriteTpl("writing.html", g.Map{
+		"id":        1,
+		"categorys": categorys,
+		"cosBucket": g.Cfg().GetString("cos.Bucket"),
+		"cosRegion": g.Cfg().GetString("cos.Region"),
+		"cosPath":   g.Cfg().GetString("cos.Path"),
+	})
 }
 
 func (*htmlApi) Login(r *ghttp.Request) {
 	r.Response.WriteTpl("layout.html", g.Map{
-		"main": "login.html",
+		"main":  "login.html",
 		"title": "登录",
 	})
 }

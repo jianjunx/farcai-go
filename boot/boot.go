@@ -1,6 +1,7 @@
 package boot
 
 import (
+	_ "farcai-go/library/cos"
 	_ "farcai-go/library/dynamodb"
 	_ "farcai-go/library/snowflake"
 	"farcai-go/library/utils"

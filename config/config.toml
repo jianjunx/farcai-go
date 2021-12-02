@@ -32,3 +32,10 @@
 # dynamodb
 [dynamodb]
     region = "us-west-1"
+
+# cos
+[cos]
+    Region = "ap-nanjing"
+    Bucket = "jianjun-1251280787"
+    Appid = "1251280787"
+    Path = "/post"
