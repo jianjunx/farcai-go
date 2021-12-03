@@ -7,6 +7,7 @@ import (
 	"farcai-go/library/jwt"
 	"farcai-go/library/snowflake"
 
+	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gtime"
 )
 
@@ -51,6 +52,7 @@ func (*userService) Login(req *model.LoginReq) (interface{}, error) {
 }
 
 func (*userService) GetUserInfo(userName string) (*model.UserItem, error) {
+	g.DB("s")
 	users := []model.UserItem{}
 	err := dao.User.GetUserItem(userName, &users)
 	if err != nil {
