@@ -46,3 +46,8 @@ func (*htmlService) Detail(id int64) (*model.ArticleItem, error) {
 	article := model.ArticleItem{}
 	return &article, dao.Article.GetArticleItem(&article, id)
 }
+
+func (*htmlService) AddViewCount(article *model.ArticleItem) {
+	article.ViewCount++
+	dao.Article.PutArticleItem(article)
+}

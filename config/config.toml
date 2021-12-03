@@ -16,7 +16,6 @@
     Path        = "template"
     DefaultFile = "index.html"
     Delimiters  =  ["${", "}"]
-    AutoEncode = true
     [viewer.Data]
         Title = "Value1"
         Description = "Value2"
@@ -28,7 +27,7 @@
         Avatar = "https://jianjun-1251280787.cos.ap-nanjing.myqcloud.com/assets/avatar_mini.png"
         UserName = "JJ Xie"
         UserDesc = "天上白玉京,十二楼五城 仙人抚我顶,结发受长生"
-        CdnURL = "https://jianjun-1251280787.file.myqcloud.com"
+        CdnURL = "//jianjunxie.gitee.io/es6/md-assets"
 # dynamodb
 [dynamodb]
     region = "us-west-1"

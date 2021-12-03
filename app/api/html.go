@@ -48,12 +48,14 @@ func (*htmlApi) Detail(r *ghttp.Request) {
 		service.ErrorHandler(r, err)
 		return
 	}
-	fmt.Println("id", id)
+	
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":    "detail.html",
 		"id":      id,
 		"article": article,
 	})
+	// 累计查看次数
+	go service.Html.AddViewCount(article)
 }
 
 func (*htmlApi) Writing(r *ghttp.Request) {

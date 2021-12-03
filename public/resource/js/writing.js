@@ -18,10 +18,13 @@ function initEditor() {
     width: "99.5%",
     height: window.innerHeight - 78,
     syncScrolling: "single",
-    path: "/resource/lib/",
+    path: CNDURL + "/lib/",
     placeholder: "",
     appendMarkdown: ArticleItem.markdown,
+    saveHTMLToTextarea: true,
+    tocm: true,
     imageUpload: true,
+    emoji: true,
     imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
     // imageUploadURL: "/api/v1/uploadfile",
     imageUploadCalback: function (files, cb) {
@@ -114,7 +117,8 @@ function publishHandler() {
   if (!currentCategory) return $(".publish-tip").text("请选择分类");
   ArticleItem.title = headInput.val();
   ArticleItem.markdown = MdEditor.getMarkdown();
-  ArticleItem.categoryId = currentCategory
+  ArticleItem.content = MdEditor.getHTML();
+  ArticleItem.categoryId = currentCategory;
 
   $.ajax({
     url: "/api/v1/article",

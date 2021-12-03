@@ -134,6 +134,9 @@ table {
 #editormd {
   margin: 0;
 }
+.editormd-preview-close-btn {
+  display: none;
+}
 
 .header {
   display: flex;

@@ -4,7 +4,7 @@ ${include "layout/personal.html" .}
     ${range $index, $elem := .articles}
     <li>
       <a href="/p/${$elem.ArticleID}.html"><h2>${$elem.Title}</h2></a>
-      <p></p>
+      <p>${$elem.Content | text}</p>
       <div>
         <span>作者：${$elem.UserName}</span>
         <span>分类：${$elem.Category.CategoryName}</span>

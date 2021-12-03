@@ -6,6 +6,7 @@ type ArticleItem struct {
 	ArticleID  int64        `dynamo:"article_id" json:"articleId"`
 	Title      string       `dynamo:"title" json:"title" v:"required"`
 	Markdown   string       `dynamo:"markdown" json:"markdown" v:"required"`
+	Content   string       `dynamo:"content" json:"content" v:"required"`
 	CategoryID int64        `dynamo:"category_id" json:"categoryId" v:"required"`
 	Category   CategoryItem `dynamo:"category" json:"category"`
 	UserName   string       `dynamo:"user_name" json:"userName"`
