@@ -21,7 +21,7 @@
             <h1 class="category-label">分类：</h1>
             <ul class="category">
               ${range $index, $elem := .categorys}
-              <li value="${$elem.CategoryID}">${$elem.CategoryName}</li>
+              <li value="${$elem.Cid}">${$elem.Name}</li>
               ${end}
             </ul>
             <div class="publish-action">

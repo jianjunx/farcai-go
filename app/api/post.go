@@ -7,18 +7,18 @@ import (
 	"github.com/gogf/gf/net/ghttp"
 )
 
-var Article = &articleApi{}
+var Post = &postApi{}
 
-type articleApi struct{}
+type postApi struct{}
 
-func (*articleApi) AddArticle(r *ghttp.Request) {
-	var p *model.ArticleItem
+func (*postApi) AddPost(r *ghttp.Request) {
+	var p *model.PostReq
 	if err := r.Parse(&p); err != nil {
 		service.ErrorHandler(r, err)
 		return
 	}
-	p.UserName = r.GetCtxVar("UserName").String()
-	err := service.Article.AddArticle(p)
+	p.UserId = r.GetCtxVar("uid").Int()
+	err := service.Post.AddPost(p)
 	if err != nil {
 		service.ErrorHandler(r, err)
 		return
@@ -29,13 +29,13 @@ func (*articleApi) AddArticle(r *ghttp.Request) {
 	})
 }
 
-func (*articleApi) UpdateArticle(r *ghttp.Request) {
-	var p *model.ArticleItem
+func (*postApi) UpdatePost(r *ghttp.Request) {
+	var p *model.PostReq
 	if err := r.Parse(&p); err != nil {
 		service.ErrorHandler(r, err)
 		return
 	}
-	err := service.Article.UpdateArticle(p)
+	err := service.Post.UpdatePost(p)
 	if err != nil {
 		service.ErrorHandler(r, err)
 		return
@@ -45,20 +45,22 @@ func (*articleApi) UpdateArticle(r *ghttp.Request) {
 	})
 }
 
-func (*articleApi) GetArticle(r *ghttp.Request) {
-	article, err := service.Article.GetArticleItem(r.GetInt64("id"))
+func (*postApi) GetPost(r *ghttp.Request) {
+	pid := r.GetInt("id")
+	post, err := service.Post.GetPostItem(&pid)
 	if err != nil {
 		service.ErrorHandler(r, err)
 		return
 	}
 	r.Response.WriteJsonExit(model.Response{
 		Code: 200,
-		Data: article,
+		Data: post,
 	})
 }
 
-func (*articleApi) DeleteArticle(r *ghttp.Request) {
-	err := service.Article.DeleteArticle(r.GetInt64("id"))
+func (*postApi) DeletePost(r *ghttp.Request) {
+	pid := r.GetInt("id")
+	err := service.Post.DeletePost(&pid)
 	if err != nil {
 		service.ErrorHandler(r, err)
 		return

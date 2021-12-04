@@ -1,13 +1,13 @@
 ${include "layout/personal.html" .}
 <div class="content">
   <ul>
-    ${range $index, $elem := .articles}
+    ${range $index, $elem := .posts}
     <li>
-      <a href="/p/${$elem.ArticleID}.html"><h2>${$elem.Title}</h2></a>
+      <a href="/p/${$elem.Pid}.html"><h2>${$elem.Title}</h2></a>
       <p>${$elem.Content | text}</p>
       <div>
         <span>作者：${$elem.UserName}</span>
-        <span>分类：${$elem.Category.CategoryName}</span>
+        <span>分类：${$elem.CategoryName}</span>
         <span>发布：${$elem.CreateAt | date "Y-m-d"}</span>
         <span>查看：${$elem.ViewCount}</span>
       </div>

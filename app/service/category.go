@@ -1,28 +1,26 @@
 package service
 
 import (
+	"database/sql"
 	"farcai-go/app/dao"
 	"farcai-go/app/model"
-	"farcai-go/library/snowflake"
-
-	"github.com/gogf/gf/os/gtime"
 )
 
 var Category = categoryService{}
 
 type categoryService struct{}
 
-func (*categoryService) AddCategory(categoryName string) error {
-	return dao.Category.PutCategoryItem(&model.CategoryItem{
-		CategoryID:   snowflake.GenerateId(),
-		CategoryName: categoryName,
-		CreateAt:     gtime.Datetime(),
-	})
+func (*categoryService) AddCategory(categoryName *string) (sql.Result, error) {
+	return dao.Category.AddCategory(categoryName)
 }
 
-func (*categoryService) GetCategorys() (*[]model.CategoryItem, error) {
-	categorys := []model.CategoryItem{}
-	err := dao.Category.GetCategorys(&categorys)
+func (*categoryService) GetCategorys() (*[]model.Category, error) {
+	categorys := []model.Category{}
+	result, err := dao.Category.GetCategorys()
+	if err != nil {
+		return nil, err
+	}
+	err = result.Structs(&categorys)
 	if err != nil {
 		return nil, err
 	}

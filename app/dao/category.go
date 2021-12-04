@@ -1,25 +1,24 @@
 package dao
 
 import (
-	"farcai-go/app/model"
-	"farcai-go/library/dynamodb"
+	"database/sql"
+
+	"github.com/gogf/gf/database/gdb"
+	"github.com/gogf/gf/frame/g"
 )
 
 var Category = categoryDao{}
 
 type categoryDao struct{}
 
-func (*categoryDao) GetCategorys(categorys *[]model.CategoryItem) error {
-	return dynamodb.CategoryTable().Scan().All(categorys)
+func (*categoryDao) GetCategorys() (gdb.Result, error) {
+	return categoryModel().All()
 }
 
-func (*categoryDao) GetCategoryItem(category *model.CategoryItem, categoryId int64) error {
-	return dynamodb.CategoryTable().Get("category_id", categoryId).One(category)
+func (*categoryDao) GetCategoryItem(cid *int) (gdb.Record, error) {
+	return categoryModel().WherePri(cid).One()
 }
 
-func (*categoryDao) PutCategoryItem(category *model.CategoryItem) error {
-	return dynamodb.CategoryTable().Put(category).Run()
+func (*categoryDao) AddCategory(categoryName *string) (sql.Result, error) {
+	return categoryModel().Data(g.Map{"name": *categoryName}).Insert()
 }
-
-// TBL_BLOG_USER
-// 087ec3bb94de26b7d2498f19b04fafee

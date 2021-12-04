@@ -81,7 +81,7 @@ function initCOS() {
 
 function getArticleItem(id) {
   $.ajax({
-    url: "/api/v1/article/" + id,
+    url: "/api/v1/post/" + id,
     type: "GET",
     contentType: "application/json",
     success: function (res) {
@@ -121,13 +121,14 @@ function publishHandler() {
   ArticleItem.categoryId = currentCategory;
 
   $.ajax({
-    url: "/api/v1/article",
-    type: ArticleItem.articleId ? "PUT" : "POST",
+    url: "/api/v1/post",
+    type: ArticleItem.pid ? "PUT" : "POST",
     contentType: "application/json",
     data: JSON.stringify(ArticleItem),
     success: function (res) {
       if (res.code == !200) return alert(res.error);
       ArticleItem = res.data || {};
+      alert("Success");
     },
     beforeSend: setAjaxToken,
   });

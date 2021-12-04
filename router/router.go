@@ -26,13 +26,13 @@ func init() {
 		// 获取分类列表
 		group.GET("/category", api.Category.GetCategorys)
 		// 添加文章
-		group.POST("/article", api.Article.AddArticle)
+		group.POST("/post", api.Post.AddPost)
 		// 更新文章
-		group.PUT("/article", api.Article.UpdateArticle)
+		group.PUT("/post", api.Post.AddPost)
 		// 根据ID查询文章
-		group.GET("/article/:id", api.Article.GetArticle)
+		group.GET("/post/:id", api.Post.GetPost)
 		// 删除文章
-		group.DELETE("/article/:id", api.Article.DeleteArticle)
+		group.DELETE("/post/:id", api.Post.DeletePost)
 		// 上传文件
 		group.GET("/credentials/cos", api.Assets.COSCredentials)
 	})
