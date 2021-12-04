@@ -11,8 +11,8 @@ import (
 )
 
 func init() {
-	bindViewFunc()
 	bindMysqlConf()
+	bindViewFunc()
 }
 
 func bindViewFunc() {
