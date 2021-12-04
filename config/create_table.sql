@@ -25,6 +25,7 @@ CREATE TABLE `tbl_blog_post`(
   `content` varchar(8000) not null,
   `category_id` int not null,
   `user_id` BIGINT(20) not null,
+  `view_count`  int not null,
   `create_at` TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
   `update_at` TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   primary key (pid),

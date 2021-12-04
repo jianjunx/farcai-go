@@ -8,9 +8,8 @@ type CategoryItem struct {
 	CreateAt     string `dynamo:"create_at" json:"-"`
 }
 
-
 type Category struct {
-	Cid int `orm:"uid"`
-	Name string `orm:"name"`
-	CreateAt string `orm:"create_at"`
+	Cid      int    `orm:"uid" json:"cid"`
+	Name     string `orm:"name" json:"name"`
+	CreateAt string `orm:"create_at" json:"createAt"`
 }
