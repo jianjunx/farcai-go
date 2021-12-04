@@ -18,7 +18,8 @@ func MiddlewareAuth(r *ghttp.Request) {
 	}
 
 	token, claims, err := jwt.ParseToken(authToken)
-	if err != nil || !token.Valid || r.GetClientIp() != claims.Audience {
+	// || r.GetClientIp() != claims.Audience 
+	if err != nil || !token.Valid {
 		r.Response.WriteJsonExit(model.Response{
 			Error: "身份认证失败",
 			Code:  403,

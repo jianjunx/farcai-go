@@ -12,10 +12,8 @@
     Stdout      = true
 
 [database]
-    host = "23.224.152.95"
-    port = "3306"
-    name = "farcai_db"
     type = "mysql"
+    link = "test:test@tcp(127.0.0.1:3306)/blog_db"
 
 # Template.
 [viewer]

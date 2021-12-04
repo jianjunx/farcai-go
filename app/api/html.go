@@ -3,7 +3,6 @@ package api
 import (
 	"errors"
 	"farcai-go/app/service"
-	"fmt"
 	"strings"
 
 	"github.com/gogf/gf/frame/g"
@@ -24,7 +23,6 @@ func (*htmlApi) Home(r *ghttp.Request) {
 		return
 	}
 	pages := service.Html.GetPages(float64(total))
-	fmt.Println("total", total)
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":      "home.html",
 		"posts":     posts,

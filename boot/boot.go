@@ -22,7 +22,9 @@ func bindViewFunc() {
 }
 
 func bindMysqlConf() {
-	g.Cfg().Set("database.user", os.Getenv("MYSQL_USER"))
-	g.Cfg().Set("database.pass", os.Getenv("MYSQL_PASS"))
+	link := os.Getenv("MYSQL_LINK")
+	if link != "" {
+		g.Cfg().Set("database.link", link)
+	}
 
 }
