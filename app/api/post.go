@@ -18,11 +18,17 @@ func (*postApi) AddPost(r *ghttp.Request) {
 		return
 	}
 	p.UserId = r.GetCtxVar("uid").Int()
-	err := service.Post.AddPost(p)
+	res, err := service.Post.AddPost(p)
 	if err != nil {
 		service.ErrorHandler(r, err)
 		return
 	}
+	pid, err := res.LastInsertId()
+	if err != nil {
+		service.ErrorHandler(r, err)
+		return
+	}
+	p.Pid = int(pid)
 	r.Response.WriteJsonExit(model.Response{
 		Code: 200,
 		Data: p,

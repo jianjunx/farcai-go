@@ -104,12 +104,16 @@ function initCache() {
   // initEditor
   initEditor();
   // 自动保存
-  setInterval(() => {}, AUTO_SAVE_TIME);
+  setInterval(() => saveHandler, AUTO_SAVE_TIME);
 }
 
 function saveHandler() {
   window.localStorage.setItem(TITLE_KEY, headInput.val());
   window.localStorage.setItem(CONTENT_KEY, MdEditor.getMarkdown());
+}
+function clearHandler() {
+  window.localStorage.removeItem(TITLE_KEY);
+  window.localStorage.removeItem(CONTENT_KEY);
 }
 
 // 发布
@@ -128,7 +132,10 @@ function publishHandler() {
     success: function (res) {
       if (res.code == !200) return alert(res.error);
       ArticleItem = res.data || {};
-      alert("Success");
+      if (!ArticleItem.pid) {
+        clearHandler();
+      }
+      location.search = "?id=" + ArticleItem.pid;
     },
     beforeSend: setAjaxToken,
   });
@@ -138,6 +145,11 @@ $(function () {
   initCOS();
   // 初始化缓存
   initCache();
+  // 返回首页
+  $(".home-btn").click(function () {
+    saveHandler();
+    location.href = "/";
+  });
   // 保存
   $(".save-btn").click(saveHandler);
   var drop = $(".publish-drop");

@@ -1,6 +1,7 @@
 package service
 
 import (
+	"database/sql"
 	"farcai-go/app/dao"
 	"farcai-go/app/model"
 
@@ -11,15 +12,14 @@ var Post = &postService{}
 
 type postService struct{}
 
-func (*postService) AddPost(post *model.PostReq) error {
-	_, err := dao.Post.AddPostItem(&g.Map{
+func (*postService) AddPost(post *model.PostReq) (sql.Result, error) {
+	return dao.Post.AddPostItem(&g.Map{
 		"title":       post.Title,
 		"content":     post.Content,
 		"markdown":    post.Markdown,
 		"category_id": post.CategoryId,
 		"user_id":     post.UserId,
 	})
-	return err
 }
 
 func (*postService) UpdatePost(post *model.PostReq) error {
