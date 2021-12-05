@@ -12,12 +12,12 @@ var Category categoryApi
 type categoryApi struct{}
 
 func (*categoryApi) AddCategory(r *ghttp.Request) {
-	p := model.CategoryItem{}
+	p := model.Category{}
 	if err := r.Parse(&p); err != nil {
 		service.ErrorHandler(r, err)
 		return
 	}
-	err := service.Category.AddCategory(p.CategoryName)
+	_, err := service.Category.AddCategory(&p.Name)
 	if err != nil {
 		service.ErrorHandler(r, err)
 		return

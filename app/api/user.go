@@ -5,6 +5,7 @@ import (
 	"farcai-go/app/service"
 
 	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/util/gconv"
 )
 
 var User = userApi{}
@@ -28,7 +29,8 @@ func (*userApi) Login(r *ghttp.Request) {
 	if err := r.Parse(&p); err != nil {
 		service.ErrorHandler(r, err)
 	}
-	resp, err := service.User.Login(p)
+	ip := r.GetClientIp()
+	resp, err := service.User.Login(p, &ip)
 	if err != nil {
 		service.ErrorHandler(r, err)
 	}
@@ -36,8 +38,8 @@ func (*userApi) Login(r *ghttp.Request) {
 }
 
 func (*userApi) GetUserInfo(r *ghttp.Request) {
-	userName := r.GetCtxVar("UserName")
-	user, err := service.User.GetUserInfo(userName.String())
+	uid := gconv.Int(r.GetCtxVar("uid"))
+	user, err := service.User.GetUserInfo(&uid)
 	if err != nil {
 		service.ErrorHandler(r, err)
 		return

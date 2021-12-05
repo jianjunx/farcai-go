@@ -172,6 +172,7 @@ header {
 .header-nav li {
   margin-left: 20px;
 }
+/* LOGIN */
 .login-btn {
   border: 0;
   background-color: cadetblue;
@@ -182,23 +183,75 @@ header {
   cursor: pointer;
 }
 .login-end {
+  padding: 20px 0 20px 20px;
   position: relative;
   cursor: pointer;
+  display: none;
+}
+.login-username{
+  margin-left: 10px;
 }
 .login-drop {
   width: 120px;
-  padding: 20px;
+  padding: 10px 0;
   box-sizing: border-box;
   display: none;
   background: #fff;
   position: absolute;
-  border: 1px solid #000;
-  top: 36px;
+  top: 46px;
   left: 0;
-  transition: all .3s;
+  transition: all 0.5s;
+  box-shadow: 0 0 10px #f1f1f1;
+  border-radius: 8px;
 }
 .login-end:hover .login-drop {
   display: block;
+}
+.login-drop li {
+  padding: 0 20px;
+  line-height: 36px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.login-drop li:hover {
+  background-color: #f1f1f1;
+}
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 200px 0;
+}
+.login h1 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
+  color: #666;
+  font-weight: bold;
+}
+.login input {
+  margin-bottom: 16px;
+  border: 1px solid #f1f1f1;
+  outline: #999;
+  width: 220px;
+  height: 36px;
+  font-size: 14px;
+  padding: 0 12px;
+  border-radius: 4px;
+}
+.login-tip {
+  color: red;
+  margin-bottom: 16px;
+  font-size: 12px;
+  display: none;
+}
+.login-submint {
+  border: 0;
+  background: cadetblue;
+  height: 36px;
+  color: #fff;
+  cursor: pointer;
 }
 /* CONTAINER */
 .container {

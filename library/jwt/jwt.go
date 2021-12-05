@@ -9,19 +9,20 @@ import (
 var jwtKey = []byte("new.bell")
 
 type Claims struct {
-	UserName string
+	Uid int
 	gojwt.StandardClaims
 }
 
 // 生成Token
-func Award(userName string) (string, error) {
+func Award(uid *int, audience *string) (string, error) {
 	// 过期时间 默认7天
 	expireTime := time.Now().Add(7 * 24 * time.Hour)
 	claims := &Claims{
-		UserName: userName,
+		Uid: *uid,
 		StandardClaims: gojwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			IssuedAt:  time.Now().Unix(),
+			Audience:  *audience,
 		},
 	}
 	// 生成token

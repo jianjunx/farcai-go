@@ -16,14 +16,15 @@ func MiddlewareAuth(r *ghttp.Request) {
 		})
 		return
 	}
+
 	token, claims, err := jwt.ParseToken(authToken)
-	if err != nil || !token.Valid {
+	if err != nil || !token.Valid || r.GetClientIp() != claims.Audience {
 		r.Response.WriteJsonExit(model.Response{
 			Error: "身份认证失败",
 			Code:  403,
 		})
 		return
 	}
-	r.SetCtxVar("UserName", claims.UserName)
+	r.SetCtxVar("uid", claims.Uid)
 	r.Middleware.Next()
 }

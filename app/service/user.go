@@ -7,7 +7,7 @@ import (
 	"farcai-go/library/jwt"
 	"farcai-go/library/snowflake"
 
-	"github.com/gogf/gf/os/gtime"
+	"github.com/gogf/gf/frame/g"
 )
 
 var User = userService{}
@@ -15,49 +15,46 @@ var User = userService{}
 type userService struct{}
 
 func (*userService) Register(req *model.RegisterReq) error {
-	users := []model.UserItem{}
-	err := dao.User.GetUserItem(req.Name, &users)
+	user := model.User{}
+	count, err := dao.User.UserCount(&g.Map{"user_name": user.UserName})
 	if err != nil {
 		return err
 	}
-	if len(users) > 0 {
+	if count > 0 {
 		return errors.New("用户已存在")
 	}
-	return dao.User.PutUserItem(&model.UserItem{
-		UserID:   snowflake.GenerateId(),
+	_, err = dao.User.AddUserItem(&model.User{
+		Uid:      int(snowflake.GenerateId()),
 		UserName: req.Name,
 		Passwd:   req.Passwd,
-		CreateAt: gtime.Datetime(),
 	})
+	return err
 }
 
-func (*userService) Login(req *model.LoginReq) (interface{}, error) {
-	users := []model.UserItem{}
-	err := dao.User.GetUserItem(req.Name, &users)
+func (*userService) Login(req *model.LoginReq, audience *string) (interface{}, error) {
+	user := model.User{}
+	record, err := dao.User.UserLogin(req)
 	if err != nil {
 		return nil, err
 	}
-	if len(users) == 0 {
-		return nil, errors.New("用户不存在")
+	if record.IsEmpty() {
+		return nil, errors.New("用户名或密码不正确")
 	}
-	if users[0].Passwd != req.Passwd {
-		return nil, errors.New("用户密码不正确")
+	if err = record.Struct(&user); err != nil {
+		return nil, errors.New("用户名或密码不正确")
 	}
-	token, err := jwt.Award(users[0].UserName)
+	token, err := jwt.Award(&user.Uid, audience)
 	if err != nil {
 		return nil, err
 	}
-	return &model.LoginResp{Token: token, UserInfo: users[0]}, nil
+	return &model.LoginResp{Token: token, UserInfo: user}, nil
 }
 
-func (*userService) GetUserInfo(userName string) (*model.UserItem, error) {
-	users := []model.UserItem{}
-	err := dao.User.GetUserItem(userName, &users)
+func (*userService) GetUserInfo(uid *int) (*model.User, error) {
+	user := model.User{}
+	err := dao.User.GetUserItem(uid, &user)
 	if err != nil {
 		return nil, err
 	}
-	if len(users) == 0 {
-		return nil, errors.New("用户不存在")
-	}
-	return &users[0], nil
+	return &user, nil
 }

@@ -11,12 +11,17 @@
     Level       = "all"
     Stdout      = true
 
+[database]
+    host = "23.224.152.95"
+    port = "3306"
+    name = "farcai_db"
+    type = "mysql"
+
 # Template.
 [viewer]
     Path        = "template"
     DefaultFile = "index.html"
     Delimiters  =  ["${", "}"]
-    AutoEncode = true
     [viewer.Data]
         Title = "Value1"
         Description = "Value2"
@@ -28,6 +33,11 @@
         Avatar = "https://jianjun-1251280787.cos.ap-nanjing.myqcloud.com/assets/avatar_mini.png"
         UserName = "JJ Xie"
         UserDesc = "天上白玉京,十二楼五城 仙人抚我顶,结发受长生"
-# dynamodb
-[dynamodb]
-    region = "us-west-1"
+        CdnURL = "//jianjunxie.gitee.io/es6/md-assets"
+
+# cos
+[cos]
+    Region = "ap-nanjing"
+    Bucket = "jianjun-1251280787"
+    Appid = "1251280787"
+    Path = "/post"
