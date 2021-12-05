@@ -1,5 +1,6 @@
 $(function () {
   loginLogic();
+  pagination();
 });
 
 // 登录部分逻辑
@@ -48,5 +49,25 @@ function loginLogic() {
     localStorage.removeItem(TOKEN_KEY);
     $(".login-action").show();
     $(".login-end").hide();
+  });
+}
+
+// 翻页逻辑
+function pagination() {
+  var query = new URLSearchParams(location.search);
+  var page = query.get("page") || 1;
+  $(".pagination-next").click(function () {
+    page++;
+    location.search = "?page=" + page;
+  });
+  $(".pagination-prev").click(function () {
+    page--;
+    if (page == 1) return (location.href = "/");
+    location.search = "?page=" + page;
+  });
+  $(".pagination-btn").click(function (event) {
+    var val = $(event.target).attr("value");
+    if (val == 1) return (location.href = "/");
+    location.search = "?page=" + val;
   });
 }

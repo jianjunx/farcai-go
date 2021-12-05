@@ -23,6 +23,7 @@
     [viewer.Data]
         Title = "Value1"
         Description = "Value2"
+        Logo = "/resource/images/logo.png"
         Navigation = ["首页","/", "关于","/about"]
         Github = "https://github.com/jianjunx"
         Gitee = "https://gitee.com/JianJunXie"

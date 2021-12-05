@@ -1,32 +1,45 @@
-${include "layout/personal.html" .}
-<div class="content">
-  <ul>
+<div class="container-left">${include "layout/personal.html" .}</div>
+<div class="container-right">
+  <ul class="post-box">
     ${range $index, $elem := .posts}
-    <li>
+    <li class="post-label">
       <a href="/p/${$elem.Pid}.html"><h2>${$elem.Title}</h2></a>
       <p>${$elem.Content | text}</p>
-      <div>
-        <span>作者：${$elem.UserName}</span>
-        <span>分类：${$elem.CategoryName}</span>
-        <span>发布：${$elem.CreateAt | date "Y-m-d"}</span>
-        <span>查看：${$elem.ViewCount}</span>
+      <div class="post-action">
+        <span>
+          <i class="iconfont icon-yonghu"></i>&nbsp; ${$elem.UserName}</span
+        >
+        <span
+          ><i class="iconfont icon-wenjianjia"></i>&nbsp;
+          ${$elem.CategoryName}</span
+        >
+        <span
+          ><i class="iconfont icon-riqi"></i>&nbsp; ${$elem.CreateAt | date
+          "Y-m-d"}</span
+        >
+        <span
+          ><i class="iconfont icon-yanjing"></i>&nbsp; ${$elem.ViewCount}</span
+        >
       </div>
     </li>
     ${end}
   </ul>
 
   ${if lt 10 .total}
-  <div>
-    <span>${.total}</span>
-    <ul>
-      ${if gt .page 1}
-      <li>上一页</li>
-      ${end} ${range $index, $elem := .pages}
-      <li value="${$elem}">${$elem}</li>
-      ${end} ${if .pageEnd}
-      <li>下一页</li>
+  <ul class="pagination">
+    <!-- <li class="pagination-total">共${.total}条</li> -->
+    ${if gt .page 1}
+    <li class="pagination-prev iconfont icon-jiantouyou"></li>
+    ${end} ${range $index, $elem := .pages}
+    <li 
+      class="pagination-btn"
+      ${if eq $elem $.page}
+      active 
       ${end}
-    </ul>
-  </div>
+      value="${$elem}">${$elem}</li>
+    ${end} ${if .pageEnd}
+    <li class="pagination-next iconfont icon-jiantouyou"></li>
+    ${end}
+  </ul>
   ${end}
 </div>

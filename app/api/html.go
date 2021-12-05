@@ -49,7 +49,7 @@ func (*htmlApi) Detail(r *ghttp.Request) {
 
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":    "detail.html",
-		"id":      id,
+		"title":   article.Title,
 		"article": article,
 	})
 	// 累计查看次数
