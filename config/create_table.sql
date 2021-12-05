@@ -22,8 +22,8 @@ CREATE TABLE `tbl_blog_category`(
 CREATE TABLE `tbl_blog_post`(
   `pid` int not null AUTO_INCREMENT,
   `title` varchar(255) not null,
-  `content` varchar(10000) not null,
-  `markdown` varchar(10000) not null,
+  `content` LONGTEXT not null,
+  `markdown` LONGTEXT not null,
   `category_id` int not null,
   `user_id` BIGINT(20) not null,
   `view_count`  int not null DEFAULT 0,
