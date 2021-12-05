@@ -3,11 +3,11 @@
 	Address     = ":3100"
 	ServerRoot  = "public"
 	ServerAgent = "farcai"
-	LogPath     = "/tmp/log/farcai/server"
+	LogPath     = "/tmp/logs/server"
 
 # Logger.
 [logger]
-    Path        = "/tmp/log/farcai"
+    Path        = "/tmp/logs"
     Level       = "all"
     Stdout      = true
 
