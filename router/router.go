@@ -36,9 +36,16 @@ func init() {
 		// 上传文件
 		group.GET("/credentials/cos", api.Assets.COSCredentials)
 	})
-	// html
+	// 首页
 	s.BindHandler("/", api.Html.Home)
+	// 文章详情
 	s.BindHandler("/p/:id", api.Html.Detail)
+	// 编辑器页
 	s.BindHandler("/writing", api.Html.Writing)
+	// 登录页
 	s.BindHandler("/login", api.Html.Login)
+	// 归档
+	s.BindHandler("/pigeonhole", api.Html.Pigeonhole)
+	// 分类
+	s.BindHandler("/c/:cid", api.Html.Category)
 }

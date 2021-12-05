@@ -1,5 +1,7 @@
 $(function () {
   loginLogic();
+  pagination();
+  tocInit();
 });
 
 // 登录部分逻辑
@@ -49,4 +51,67 @@ function loginLogic() {
     $(".login-action").show();
     $(".login-end").hide();
   });
+}
+
+// 翻页逻辑
+function pagination() {
+  var query = new URLSearchParams(location.search);
+  var page = query.get("page") || 1;
+  $(".pagination-next").click(function () {
+    page++;
+    location.search = "?page=" + page;
+  });
+  $(".pagination-prev").click(function () {
+    page--;
+    if (page == 1) return (location.search = "");
+    location.search = "?page=" + page;
+  });
+  // $(".pagination-btn").click(function (event) {
+  //   var val = $(event.target).attr("value");
+  //   if (val == 1) return (location.href = "/");
+  //   location.search = "?page=" + val;
+  // });
+}
+
+function tocInit() {
+  var tocBox = $("#toc-box");
+  if (tocBox.length == 0) return;
+  var titles = $(
+    "#view-content h1,#view-content h2,#view-content h3,#view-content h4,#view-content h5,#view-content h6"
+  );
+  var len = titles.length;
+  if (len === 0) return;
+  for (var i = 0; i < len; i++) {
+    var ele = titles[i];
+    const item = $(ele).clone();
+    item.addClass("toc-label");
+    item.attr("id", ele.id + "_sub");
+    tocBox.append(item);
+  }
+  tocScrollTo(tocBox);
+}
+function tocScrollTo(tocBox) {
+  tocBox.click(function (event) {
+    $(event.target).addClass("active").siblings().removeClass("active");
+    var id = event.target.id.replace("_sub", "");
+    var top = document.getElementById(id).offsetTop;
+    window.scrollTo(0, top - 80);
+  });
+}
+function getTitles() {
+  const titles = $(
+    "#view-content h1,#view-content h2,#view-content h3,#view-content h4,#view-content h5,#view-content h6"
+  );
+  const eles = [];
+  for (let i = 0; i < titles.length; i++) {
+    const cur = titles[i];
+    console.log(cur.textContent);
+    const next = titles[i + 1];
+    const param = { id: cur.id, text: cur.textContent };
+    const top = $(cur).offset().top - 80;
+    param.min = i === 0 ? 0 : top;
+    param.max = next ? $(next).offset().top - 80 : 99999;
+    eles.push(param);
+  }
+  return eles;
 }

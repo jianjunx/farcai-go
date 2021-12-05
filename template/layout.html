@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <meta name="referrer" content="no-referrer"> -->
-  <meta name="description" content="${.Description}">
-  ${if .title}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="referrer" content="no-referrer"> -->
+    <meta name="description" content="${.Description}" />
+    ${if .title}
     <title>${.title} - ${.Title}</title>
-  ${else}
+    ${else}
     <title>${.Title}</title>
-  ${end}
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_2974461_c4ysvtcjl6e.css">
-  <link rel="stylesheet" href="/resource/css/index.css">
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-</head>
-<body>
-  ${include "layout/header.html" .}
-  <main class="container">
-    ${include .main .}
-  </main>
-  ${include "layout/footer.html" .}
-</body>
-<script src="/resource/js/index.js"></script>
+    ${end}
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_2974461_gw1abm26wpn.css"
+    />
+    <link rel="stylesheet" href="/resource/css/index.css" />
+    <link rel="icon" href="/resource/images/favicon.png" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+  <body>
+    ${include "layout/header.html" .}
+    <main class="container">${include .main .}</main>
+    ${include "layout/footer.html" .}
+  </body>
+  <script src="/resource/js/index.js"></script>
 </html>

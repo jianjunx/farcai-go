@@ -5,17 +5,28 @@
     <p class="personal-desc">${.UserDesc}</p>
     <span class="gap-dashed"></span>
     <ul class="personal-action">
-      <li><a class="iconfont icon-github" href="${.Github}" target="_blank"> GitHub</a></li>
-      <li><a class="iconfont icon-gitee2" href="${.Gitee}" target="_blank"> Gitee</a></li>
-      <li><a class="iconfont icon-xinlangweibo" href="${.Weibo}" target="_blank"> 微博</a></li>
-      <li><a class="iconfont icon-zhihu-circle" href="${.Zhihu}" target="_blank"> 知乎</a></li>
+      <li>
+        <a 
+        class="iconfont icon-github" href="${.Github}" target="_blank"> GitHub</a>
+      </li>
+      <li>
+        <a class="iconfont icon-gitee2" href="${.Gitee}" target="_blank"> Gitee</a>
+      </li>
+      <li>
+        <a class="iconfont icon-xinlangweibo" href="${.Weibo}" target="_blank"> 微博</a>
+      </li>
+      <li>
+        <a class="iconfont icon-zhihu-circle" href="${.Zhihu}" target="_blank"> 知乎</a>
+      </li>
     </ul>
   </div>
   <span class="gap-solid"></span>
   <div class="personal-box">
-    
-    <ul>
-      <li>分类</li>
-    </ul>
+    <div class="personal-cteg">
+      <h2>分类：</h2>
+      ${range $index,$elem := .categorys}
+      <a class="iconfont icon-fenlei-copy" href="/c/${$elem.Cid}">&nbsp;${$elem.Name}</a>
+      ${end}
+    </div>
   </div>
 </div>

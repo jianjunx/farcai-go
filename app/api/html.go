@@ -3,7 +3,6 @@ package api
 import (
 	"errors"
 	"farcai-go/app/service"
-	"fmt"
 	"strings"
 
 	"github.com/gogf/gf/frame/g"
@@ -24,7 +23,6 @@ func (*htmlApi) Home(r *ghttp.Request) {
 		return
 	}
 	pages := service.Html.GetPages(float64(total))
-	fmt.Println("total", total)
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":      "home.html",
 		"posts":     posts,
@@ -48,10 +46,9 @@ func (*htmlApi) Detail(r *ghttp.Request) {
 		service.ErrorHandler(r, err)
 		return
 	}
-
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":    "detail.html",
-		"id":      id,
+		"title":   article.Title,
 		"article": article,
 	})
 	// 累计查看次数
@@ -65,7 +62,6 @@ func (*htmlApi) Writing(r *ghttp.Request) {
 		return
 	}
 	r.Response.WriteTpl("writing.html", g.Map{
-		"id":        1,
 		"categorys": categorys,
 		"cosBucket": g.Cfg().GetString("cos.Bucket"),
 		"cosRegion": g.Cfg().GetString("cos.Region"),
@@ -77,5 +73,50 @@ func (*htmlApi) Login(r *ghttp.Request) {
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":  "login.html",
 		"title": "登录",
+	})
+}
+
+func (*htmlApi) Pigeonhole(r *ghttp.Request) {
+	lines, err := service.Html.Pigeonhole()
+	if err != nil {
+		service.ErrorHandler(r, err)
+		return
+	}
+	r.Response.WriteTpl("layout.html", g.Map{
+		"main":  "pigeonhole.html",
+		"title": "归档",
+		"lines": lines,
+	})
+}
+
+func (*htmlApi) Category(r *ghttp.Request) {
+	page := r.GetQueryInt("page", 1)
+	ctgId := r.GetInt("cid")
+	if ctgId == 0 {
+		r.Response.RedirectTo("/")
+		return
+	}
+	posts, categorys, total, err := service.Html.Home(&ctgId, &page)
+	if err != nil {
+		service.ErrorHandler(r, err)
+		return
+	}
+	categoryName := ""
+	if len(*posts) > 0 {
+		// 取当前分类名
+		_p := *posts
+		categoryName = _p[0].CategoryName
+	}
+	pages := service.Html.GetPages(float64(total))
+	r.Response.WriteTpl("layout.html", g.Map{
+		"main":         "category.html",
+		"title":        categoryName,
+		"posts":        posts,
+		"categorys":    categorys,
+		"categoryName": categoryName,
+		"total":        total,
+		"page":         page,
+		"pageEnd":      int(page) != len(pages),
+		"pages":        pages,
 	})
 }
