@@ -62,12 +62,12 @@ function pagination() {
   });
   $(".pagination-prev").click(function () {
     page--;
-    if (page == 1) return (location.href = "/");
+    if (page == 1) return (location.search = "");
     location.search = "?page=" + page;
   });
-  $(".pagination-btn").click(function (event) {
-    var val = $(event.target).attr("value");
-    if (val == 1) return (location.href = "/");
-    location.search = "?page=" + val;
-  });
+  // $(".pagination-btn").click(function (event) {
+  //   var val = $(event.target).attr("value");
+  //   if (val == 1) return (location.href = "/");
+  //   location.search = "?page=" + val;
+  // });
 }

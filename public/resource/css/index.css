@@ -279,6 +279,12 @@ header {
   padding: 20px 28px;
   box-sizing: border-box;
 }
+.category-title {
+  font-size: 20px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  color: #86909c;
+}
 /* POST */
 .post-label {
 }
@@ -332,7 +338,11 @@ header {
 .pagination-prev {
   transform: translateY(1px) rotate(180deg);
 }
-.pagination-btn[active] {
+.pagination-btn a {
+  text-decoration: none;
+  color: inherit;
+}
+.pagination-btn[active] a {
   color: cadetblue;
 }
 /* PERSONAL */
@@ -392,12 +402,27 @@ header {
   height: 0;
   border-top: 1px solid #f1f1f1;
 }
+.personal-cteg {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+}
+.personal-cteg h2 {
+  margin-bottom: 10px;
+  color: #86909c;
+}
+.personal-cteg a {
+  color: #666;
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 14px;
+  line-height: 26px;
+}
 /* FOOTER */
 footer {
   width: 100%;
   text-align: center;
-  margin-top: 50px;
-  margin-bottom: 30px;
+  margin: 30px 0;
   color: #86909c;
   font-size: 14px;
 }
@@ -409,5 +434,34 @@ footer a {
   color: #1d2129;
 }
 footer a:hover {
+  text-decoration: underline;
+}
+/* pige 归档 */
+.pige-box {
+  padding: 10px;
+  box-sizing: border-box;
+}
+.pige-month {
+  font-size: 22px;
+  line-height: 36px;
+  /* margin-top: 20px;
+  margin-bottom: 10px; */
+  color: #666;
+}
+.pige-wrap {
+  margin-left: 30px;
+}
+.pige-label {
+  line-height: 32px;
+}
+.pige-label span {
+  margin-right: 10px;
+  color: #86909c;
+}
+.pige-label a {
+  color: #1d2129;
+  text-decoration: none;
+}
+.pige-label a:hover {
   text-decoration: underline;
 }

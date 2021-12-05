@@ -1,0 +1,26 @@
+<ul class="post-box">
+  ${range $index, $elem := .posts}
+  <li class="post-label">
+    <a href="/p/${$elem.Pid}.html"><h2>${$elem.Title}</h2></a>
+    <p>${$elem.Content | text}</p>
+    <div class="post-action">
+      <span>
+        <i class="iconfont icon-yonghu"></i>
+        &nbsp; ${$elem.UserName}
+      </span>
+      <span>
+        <i class="iconfont icon-wenjianjia"></i>
+        &nbsp;${$elem.CategoryName}
+      </span>
+      <span>
+        <i class="iconfont icon-riqi"></i>
+        &nbsp;${dateDay $elem.CreateAt}
+      </span>
+      <span>
+        <i class="iconfont icon-yanjing"></i>
+        &nbsp;${$elem.ViewCount}
+      </span>
+    </div>
+  </li>
+  ${end}
+</ul>

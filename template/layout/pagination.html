@@ -1,0 +1,25 @@
+<div>
+  ${if lt 10 .total}
+  <ul class="pagination">
+    <!-- <li class="pagination-total">共${.total}条</li> -->
+    ${if gt .page 1}
+    <li class="pagination-prev iconfont icon-jiantouyou"></li>
+    ${end} ${range $index, $elem := .pages}
+    <li
+      class="pagination-btn"
+      ${if
+      eq
+      $elem
+      $.page}
+      active
+      ${end}
+      value="${$elem}"
+    >
+      <a href="?page=${$elem}">${$elem}</a>
+    </li>
+    ${end} ${if .pageEnd}
+    <li class="pagination-next iconfont icon-jiantouyou"></li>
+    ${end}
+  </ul>
+  ${end}
+</div>

@@ -21,10 +21,10 @@
     DefaultFile = "index.html"
     Delimiters  =  ["${", "}"]
     [viewer.Data]
-        Title = "Value1"
-        Description = "Value2"
+        Title = "JJXie"
+        Description = "JJXie的个人博客"
         Logo = "/resource/images/logo.png"
-        Navigation = ["首页","/", "关于","/about"]
+        Navigation = ["首页","/", "归档","/pigeonhole", "关于","/about"]
         Github = "https://github.com/jianjunx"
         Gitee = "https://gitee.com/JianJunXie"
         Zhihu = "/"

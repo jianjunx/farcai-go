@@ -8,6 +8,7 @@ import (
 	"sync"
 
 	"github.com/gogf/gf/database/gdb"
+	"github.com/gogf/gf/os/gtime"
 )
 
 var Html = &htmlService{}
@@ -64,4 +65,25 @@ func (*htmlService) Detail(id *int) (*model.PostMore, error) {
 
 func (*htmlService) AddViewCount(pid *int) {
 	dao.Post.AddViewCount(pid)
+}
+
+func (*htmlService) Pigeonhole() (*map[string][]model.Post, error) {
+	var (
+		lines = make(map[string][]model.Post)
+		posts []model.Post
+	)
+	record, err := dao.Post.GetPostAll()
+	if err != nil {
+		return nil, err
+	}
+	if err = record.Structs(&posts); err != nil {
+		return nil, err
+	}
+	for _, value := range posts {
+		// 创建日期格式化成月
+		key := gtime.NewFromStr(value.CreateAt).Format("Y-m")
+		// 追加切片
+		lines[key] = append(lines[key], value)
+	}
+	return &lines, nil
 }

@@ -42,6 +42,10 @@ func (*postDao) GetPostPages(cid, page *int) (*gdb.Result, int, error) {
 	return &result, total, err
 }
 
+func (*postDao) GetPostAll() (gdb.Result, error) {
+	return postModel().Fields("pid", "title", "create_at").OrderDesc("pid").All()
+}
+
 // 根据id获取文章
 func (*postDao) GetPostItem(pid *int) (gdb.Record, error) {
 	return postModel("p").LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields("p.*,c.name as category_name,u.user_name as user_name").WherePri(pid).One()
