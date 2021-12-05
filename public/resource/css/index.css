@@ -472,28 +472,55 @@ footer a:hover {
 .detail {
   display: flex;
   width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
-  background-color: #fff;
-  box-sizing: border-box;
-  padding: 30px;
 }
 .detail-left {
   width: calc(100% - 230px);
-  display: inline-block;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 30px 0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
 #view-content {
   box-sizing: border-box;
-  padding: 0;
+  padding: 0 30px;
+  margin-top: 20px;
 }
 .detail-right {
   display: inline-block;
   width: 220px;
   margin-left: 10px;
 }
-.toc-box {
+.detail-title {
+  font-size: 26px;
+  line-height: 38px;
+  padding: 0 30px;
+}
+.detail-action {
+  margin: 20px 0;
+  padding: 0 30px;
+  color: #86909c;
+}
+.detail-action i {
+  font-size: 14px;
+}
+.detail-action span {
+  font-size: 14px;
+  margin-right: 20px;
+}
+.toc-card {
   position: sticky;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+  background-color: #fff;
   top: 80px;
+}
+.toc-card-list {
+  color: #86909c;
+  margin-bottom: 10px;
+}
+.toc-box {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -501,8 +528,23 @@ footer a:hover {
 .toc-label {
   font-size: 12px;
   cursor: pointer;
-  line-height: 18px;
-  margin-left: 20px;
+  line-height: 22px;
+  margin-left: 10px;
+}
+h2.toc-label {
+  margin-left: 14px;
+}
+h3.toc-label {
+  margin-left: 18px;
+}
+h4.toc-label {
+  margin-left: 22px;
+}
+h5.toc-label {
+  margin-left: 26px;
+}
+h6.toc-label {
+  margin-left: 30px;
 }
 .toc-label.active {
   color: cadetblue;
