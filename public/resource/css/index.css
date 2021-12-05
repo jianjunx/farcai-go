@@ -348,6 +348,8 @@ header {
 /* PERSONAL */
 .personal {
   width: 100%;
+  position: sticky;
+  top: 80px;
   border-radius: 8px;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
   background-color: #fff;
@@ -464,4 +466,44 @@ footer a:hover {
 }
 .pige-label a:hover {
   text-decoration: underline;
+}
+
+/* DETAIL */
+.detail {
+  display: flex;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 30px;
+}
+.detail-left {
+  width: calc(100% - 230px);
+  display: inline-block;
+}
+#view-content {
+  box-sizing: border-box;
+  padding: 0;
+}
+.detail-right {
+  display: inline-block;
+  width: 220px;
+  margin-left: 10px;
+}
+.toc-box {
+  position: sticky;
+  top: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.toc-label {
+  font-size: 12px;
+  cursor: pointer;
+  line-height: 18px;
+  margin-left: 20px;
+}
+.toc-label.active {
+  color: cadetblue;
 }
