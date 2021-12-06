@@ -1,5 +1,7 @@
 var TOKEN_KEY = "AUTH_TOKEN";
 var USER_KEY = "USER_INFO";
+var SALT = "_farcai_salt"; // 加盐
+
 $(function () {
   loginLogic();
   pagination();
@@ -35,10 +37,9 @@ function loginLogic() {
     var passwd = $(".login-passwd").val();
     if (!name) return tipEle.show().text("请输入用户名");
     if (!passwd) return tipEle.show().text("请输入密码");
-    // 加盐
-    var salt = "_farcai_salt";
+    
     // md5加密
-    var MD5Passwd = new Hashes.MD5().hex(passwd + salt);
+    var MD5Passwd = new Hashes.MD5().hex(passwd + SALT);
     $.ajax({
       url: "/api/v1/login",
       data: JSON.stringify({ username: name, passwd: MD5Passwd }),
