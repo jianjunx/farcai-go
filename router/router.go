@@ -3,6 +3,7 @@ package router
 import (
 	"farcai-go/app/api"
 	"farcai-go/middleware"
+	"os"
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
@@ -12,8 +13,10 @@ func init() {
 	s := g.Server()
 	s.Group("/api/v1", func(group *ghttp.RouterGroup) {
 		group.Middleware(middleware.MiddlewareCors)
-		// 注册
-		group.POST("/signup", api.User.Register)
+		// 注册 非生产环境开放
+		if os.Getenv("ENV_MODE") != "PROD" {
+			group.POST("/signup", api.User.Register)
+		}
 		// 登录
 		group.POST("/login", api.User.Login)
 
