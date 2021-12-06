@@ -18,4 +18,4 @@ cbuild
 main
 gf-empty
 .vscode
-go.sum
+local.env
