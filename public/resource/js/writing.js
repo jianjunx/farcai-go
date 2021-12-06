@@ -178,6 +178,9 @@ $(function () {
   $(".publish-close").click(function () {
     drop.hide();
   });
+  $(".cancel-btn").click(function () {
+    drop.hide();
+  });
   // 发布逻辑
   $(".publish-btn").click(publishHandler);
   // 选择分类

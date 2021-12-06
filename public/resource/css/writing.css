@@ -229,8 +229,8 @@ table {
 }
 .publish-close {
   position: absolute;
-  top: -10px;
-  right: 0;
+  top: -5px;
+  right: 5px;
   font-size: 26px;
   padding: 10px;
   cursor: pointer;
