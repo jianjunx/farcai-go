@@ -7,9 +7,18 @@ $(function () {
   pagination();
   tocInit();
   initEditLogic();
+  headerActive();
 });
 function setAjaxToken(xhr) {
   xhr.setRequestHeader("Authorization", localStorage.getItem("AUTH_TOKEN"));
+}
+function headerActive() {
+  var nav = $('a[href="' + location.pathname + '"]');
+  if (nav.length == 0) {
+    // $('a[href="/"]').addClass("active");
+    return;
+  }
+  nav.addClass("active");
 }
 function initEditLogic() {
   var edit = $(".detail-edit");
@@ -37,7 +46,7 @@ function loginLogic() {
     var passwd = $(".login-passwd").val();
     if (!name) return tipEle.show().text("请输入用户名");
     if (!passwd) return tipEle.show().text("请输入密码");
-    
+
     // md5加密
     var MD5Passwd = new Hashes.MD5().hex(passwd + SALT);
     $.ajax({
