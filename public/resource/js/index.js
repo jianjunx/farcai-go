@@ -4,9 +4,21 @@ $(function () {
   loginLogic();
   pagination();
   tocInit();
+  initEditLogic();
 });
 function setAjaxToken(xhr) {
   xhr.setRequestHeader("Authorization", localStorage.getItem("AUTH_TOKEN"));
+}
+function initEditLogic() {
+  var edit = $(".detail-edit");
+  if (localStorage.getItem(TOKEN_KEY) && edit.length > 0) {
+    edit.show();
+    var delEle = $(".detail-delete");
+    // 绑定删除事件
+    delEle.click(function () {
+      deleteDetail(delEle.attr("pid"));
+    });
+  }
 }
 // 登录部分逻辑
 function loginLogic() {
@@ -90,14 +102,6 @@ function deleteDetail(id) {
 function tocInit() {
   var tocBox = $("#toc-box");
   if (tocBox.length == 0) return;
-  if (localStorage.getItem(TOKEN_KEY)) {
-    $(".detail-edit").show();
-    var delEle = $(".detail-delete");
-    // 绑定删除事件
-    delEle.click(function () {
-      deleteDetail(delEle.attr("pid"));
-    });
-  }
   var titles = $(
     "#view-content h1,#view-content h2,#view-content h3,#view-content h4,#view-content h5,#view-content h6"
   );

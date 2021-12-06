@@ -3,7 +3,6 @@ package api
 import (
 	"errors"
 	"farcai-go/app/service"
-	"fmt"
 	"strings"
 
 	"github.com/gogf/gf/frame/g"
@@ -125,5 +124,20 @@ func (*htmlApi) Category(r *ghttp.Request) {
 
 func (*htmlApi) CustomPage(r *ghttp.Request) {
 	custom := r.GetString("custom")
-	fmt.Println("custom", custom)
+	empt, post, err := service.Html.Custom(&custom)
+	if empt {
+		r.Response.RedirectTo("/")
+		return
+	}
+	if err != nil {
+		service.ErrorHandler(r, err)
+		return
+	}
+	r.Response.WriteTpl("layout.html", g.Map{
+		"main":    "custom.html",
+		"title":   post.Title,
+		"article": post,
+	})
+	// 累计查看次数
+	go service.Html.AddViewCount(&post.Pid)
 }

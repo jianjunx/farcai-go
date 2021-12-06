@@ -102,3 +102,19 @@ func (*htmlService) Pigeonhole() (*map[string][]model.Post, *[]model.Category, e
 	ws.Wait()
 	return &lines, &categorys, err
 }
+
+func (*htmlService) Custom(slug *string) (bool, *model.Post, error) {
+	var post model.Post
+	record, err := dao.Post.GetCustomPost(slug)
+	if err != nil {
+		return true, nil, err
+	}
+	if record.IsEmpty() {
+		return true, nil, nil
+	}
+	err = record.Struct(&post)
+	if err != nil {
+		return true, nil, err
+	}
+	return false, &post, nil
+}
