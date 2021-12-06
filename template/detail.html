@@ -20,6 +20,14 @@
         <i class="iconfont icon-yanjing"></i>
         &nbsp;${.article.ViewCount}
       </span>
+      <span class="detail-edit">
+        <i class="iconfont icon-wenbenshuru"></i>
+        <a href="/writing?id=${.article.Pid}">编辑</a>
+      </span>
+      <span class="detail-edit detail-delete" pid="${.article.Pid}">
+        <i class="iconfont icon-shanchu"></i>
+        删除
+      </span>
     </div>
     <div class="gap-solid"></div>
     <div id="view-content" class="markdown-body editormd-html-preview">

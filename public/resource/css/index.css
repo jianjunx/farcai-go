@@ -496,6 +496,12 @@ footer a:hover {
   padding: 0 30px;
   color: #86909c;
 }
+.detail-delete {
+  cursor: pointer;
+}
+.detail-edit {
+  display: none;
+}
 .detail-action i {
   font-size: 14px;
 }
