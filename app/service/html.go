@@ -67,23 +67,38 @@ func (*htmlService) AddViewCount(pid *int) {
 	dao.Post.AddViewCount(pid)
 }
 
-func (*htmlService) Pigeonhole() (*map[string][]model.Post, error) {
+func (*htmlService) Pigeonhole() (*map[string][]model.Post, *[]model.Category, error) {
 	var (
-		lines = make(map[string][]model.Post)
-		posts []model.Post
+		ws        sync.WaitGroup
+		lines     = make(map[string][]model.Post)
+		posts     []model.Post
+		categorys []model.Category
+		err       error
 	)
-	record, err := dao.Post.GetPostAll()
-	if err != nil {
-		return nil, err
-	}
-	if err = record.Structs(&posts); err != nil {
-		return nil, err
-	}
-	for _, value := range posts {
-		// 创建日期格式化成月
-		key := gtime.NewFromStr(value.CreateAt).Format("Y-m")
-		// 追加切片
-		lines[key] = append(lines[key], value)
-	}
-	return &lines, nil
+	ws.Add(2)
+	go func() {
+		defer ws.Done()
+		var record gdb.Result
+		record, err = dao.Post.GetPostAll()
+		if err != nil {
+			return
+		}
+		if err = record.Structs(&posts); err != nil {
+			return
+		}
+		for _, value := range posts {
+			// 创建日期格式化成月
+			key := gtime.NewFromStr(value.CreateAt).Format("Y-m")
+			// 追加切片
+			lines[key] = append(lines[key], value)
+		}
+	}()
+	go func() {
+		defer ws.Done()
+		var record gdb.Result
+		record, err = dao.Category.GetCategorys()
+		err = record.Structs(&categorys)
+	}()
+	ws.Wait()
+	return &lines, &categorys, err
 }

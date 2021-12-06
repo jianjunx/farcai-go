@@ -59,10 +59,9 @@ function initCOS() {
         type: "GET",
         contentType: "application/json",
         success: function (res) {
-          if (res.code == !200) return alert(res.error);
+          if (res.code !== 200) return alert(res.error);
           var data = res.data || {};
           var credentials = data.Credentials || {};
-          console.log("data", data);
           var params = {
             TmpSecretId: credentials.TmpSecretId,
             TmpSecretKey: credentials.TmpSecretKey,
@@ -85,7 +84,10 @@ function getArticleItem(id) {
     type: "GET",
     contentType: "application/json",
     success: function (res) {
-      if (res.code == !200) return alert(res.error);
+      if (res.code != 200) {
+        initEditor();
+        return alert(res.error);
+      }
       ArticleItem = res.data || {};
       initEditor();
     },
@@ -130,7 +132,7 @@ function publishHandler() {
     contentType: "application/json",
     data: JSON.stringify(ArticleItem),
     success: function (res) {
-      if (res.code == !200) return alert(res.error);
+      if (res.code !== 200) return alert(res.error);
       ArticleItem = res.data || {};
       if (!ArticleItem.pid) {
         clearHandler();

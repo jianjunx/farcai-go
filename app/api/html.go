@@ -77,21 +77,22 @@ func (*htmlApi) Login(r *ghttp.Request) {
 }
 
 func (*htmlApi) Pigeonhole(r *ghttp.Request) {
-	lines, err := service.Html.Pigeonhole()
+	lines, categorys, err := service.Html.Pigeonhole()
 	if err != nil {
 		service.ErrorHandler(r, err)
 		return
 	}
 	r.Response.WriteTpl("layout.html", g.Map{
-		"main":  "pigeonhole.html",
-		"title": "归档",
-		"lines": lines,
+		"main":      "pigeonhole.html",
+		"title":     "归档",
+		"categorys": categorys,
+		"lines":     lines,
 	})
 }
 
 func (*htmlApi) Category(r *ghttp.Request) {
 	page := r.GetQueryInt("page", 1)
-	ctgId := r.GetInt("cid")
+	ctgId := r.GetInt("cid", 0)
 	if ctgId == 0 {
 		r.Response.RedirectTo("/")
 		return
