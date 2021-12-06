@@ -3,6 +3,7 @@ package api
 import (
 	"errors"
 	"farcai-go/app/service"
+	"fmt"
 	"strings"
 
 	"github.com/gogf/gf/frame/g"
@@ -120,4 +121,9 @@ func (*htmlApi) Category(r *ghttp.Request) {
 		"pageEnd":      int(page) != len(pages),
 		"pages":        pages,
 	})
+}
+
+func (*htmlApi) CustomPage(r *ghttp.Request) {
+	custom := r.GetString("custom")
+	fmt.Println("custom", custom)
 }

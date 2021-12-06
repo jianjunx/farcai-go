@@ -31,7 +31,7 @@ func init() {
 		// 添加文章
 		group.POST("/post", api.Post.AddPost)
 		// 更新文章
-		group.PUT("/post", api.Post.AddPost)
+		group.PUT("/post", api.Post.UpdatePost)
 		// 根据ID查询文章
 		group.GET("/post/:id", api.Post.GetPost)
 		// 删除文章
@@ -51,4 +51,6 @@ func init() {
 	s.BindHandler("/pigeonhole", api.Html.Pigeonhole)
 	// 分类
 	s.BindHandler("/c/:cid", api.Html.Category)
+	// 自定义页面
+	s.BindHandler("/:custom", api.Html.CustomPage)
 }

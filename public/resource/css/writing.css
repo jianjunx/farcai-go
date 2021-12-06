@@ -187,9 +187,20 @@ table {
 }
 .category-label {
   margin-bottom: 12px;
+  margin-top: 16px;
   color: #999;
 }
-.category li {
+.slug-input {
+  border: 0;
+  background-color: #f1f1f1;
+  height: 30px;
+  width: 230px;
+  padding: 2px 10px;
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 4px;
+}
+.category-style li {
   display: inline-block;
   margin-right: 5px;
   margin-bottom: 10px;
@@ -207,7 +218,7 @@ table {
   color: #86909c;
   background-color: #f4f5f5;
 }
-.category li.active {
+.category-style li.active {
   background-color: #999;
   color: #fff;
 }
