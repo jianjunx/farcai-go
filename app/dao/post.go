@@ -13,6 +13,13 @@ var Post = postDao{}
 
 type postDao struct{}
 
+func addWhere(mod *gdb.Model, cid *int) *gdb.Model {
+	if *cid > 0 {
+		return mod.Where("type", 0).Where("category_id", *cid)
+	}
+	return mod.Where("type", 0)
+}
+
 // 分页列表
 func (*postDao) GetPostPages(cid, page *int) (*gdb.Result, int, error) {
 	var (
@@ -24,19 +31,13 @@ func (*postDao) GetPostPages(cid, page *int) (*gdb.Result, int, error) {
 	ws.Add(2)
 	go func() {
 		defer ws.Done()
-		mod := postModel()
-		if *cid > 0 {
-			mod = mod.Where("category_id", cid)
-		}
-		total, err = mod.Count()
+		total, err = addWhere(postModel(), cid).Count()
 	}()
 	go func() {
 		defer ws.Done()
-		mod := postModel("p")
-		if *cid > 0 {
-			mod = mod.Where("category_id", cid)
-		}
-		result, err = mod.LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields("p.*,c.name as category_name,u.user_name as user_name").OrderDesc("pid").Offset(10 * (*page - 1)).Limit(10).All()
+		mod := addWhere(postModel("p"), cid)
+		field := "p.pid,p.title,p.content,p.view_count,p.create_at,p.user_id,p.category_id,c.name as category_name,u.user_name as user_name"
+		result, err = mod.LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields(&field).OrderDesc("pid").Offset(10 * (*page - 1)).Limit(10).All()
 	}()
 	ws.Wait()
 	return &result, total, err
@@ -48,7 +49,13 @@ func (*postDao) GetPostAll() (gdb.Result, error) {
 
 // 根据id获取文章
 func (*postDao) GetPostItem(pid *int) (gdb.Record, error) {
-	return postModel("p").LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields("p.*,c.name as category_name,u.user_name as user_name").WherePri(pid).One()
+	field := "p.*,c.name as category_name,u.user_name as user_name"
+	return postModel("p").LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields(&field).WherePri(pid).One()
+}
+
+// 获取自定义文章
+func (*postDao) GetCustomPost(slug *string) (gdb.Record, error) {
+	return postModel().Fields("pid,title,content,view_count,create_at").Where("slug", slug).One()
 }
 
 // 添加文章
@@ -63,6 +70,8 @@ func (*postDao) UpdatePostItem(post *model.PostReq) (sql.Result, error) {
 		"markdown":    post.Markdown,
 		"category_id": post.CategoryId,
 		"user_id":     post.UserId,
+		"type":        post.Type,
+		"slug":        post.Slug,
 	}).WherePri(post.Pid).Update()
 }
 

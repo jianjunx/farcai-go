@@ -47,3 +47,40 @@ $ make image
 # 运行镜像 加载本地local.env环境变量 映射3200端口 将logs文件夹与本地home/log映射
 docker run --env-file ./local.env -p 3200:3100 --name farcai-server -d -v /home/logs:/logs farcai:镜像名和版本号
 ```
+
+# 功能说明
+
+项目首次部署后需要对部分数据进行初始化，可通过路由查看对应的接口，再通过 Postman 进行添加。
+
+### 注册
+
+地址：/api/v1/signup
+
+```json
+{
+  "name": "username",
+  "passwd": "md5加密后的数据",
+  "repasswd": "同上"
+}
+```
+
+目前没有提供注册页面，账号需要自己从数据库添加，注意：密码在前端登录时进行了 MD5 加密，所以在数据库中添加密码也必须是 MD5 加密后的 [MD5](https://www.cmd5.com/hash.aspx?s=123456) 在这里加密一下，其中：
+
+```
+Pass # 明文密码
+Salt # 加盐 默认是：_farcai_salt，也可以在index.js里修改成自己的
+```
+注册完在页面登录一下
+
+### 添加分类
+地址：/api/v1/category POST
+请求头：Authorization=打开浏览器调试从页面localstore里面取
+```json
+{
+    "name": "Golang"
+}
+```
+
+### 添加自定也页面
+添加自定义页面与添加文章相同，在发布弹窗下选择自定义页，并填写自定义链接。
+访问时地址就是```host/自定义链接```，网页标题就是添加的文章标题。

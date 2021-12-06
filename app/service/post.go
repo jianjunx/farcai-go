@@ -19,6 +19,8 @@ func (*postService) AddPost(post *model.PostReq) (sql.Result, error) {
 		"markdown":    post.Markdown,
 		"category_id": post.CategoryId,
 		"user_id":     post.UserId,
+		"type":        post.Type,
+		"slug":        post.Slug,
 	})
 }
 

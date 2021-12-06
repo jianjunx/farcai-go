@@ -127,6 +127,13 @@ q:after {
   content: "";
   content: none;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  text-decoration: underline;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -168,7 +175,6 @@ header {
   font-weight: bold;
 }
 .header-wrap a {
-  text-decoration: none;
   color: #333;
 }
 .header-nav {
@@ -177,6 +183,9 @@ header {
 }
 .header-nav li {
   margin-left: 20px;
+}
+.header-nav .active {
+  color: cadetblue;
 }
 /* LOGIN */
 .login-btn {
@@ -291,9 +300,6 @@ header {
 .post-label + .post-label {
   border-top: 1px solid #f1f1f1;
 }
-.post-label a {
-  text-decoration: none;
-}
 .post-label h2 {
   margin-top: 10px;
   margin-bottom: 4px;
@@ -338,10 +344,6 @@ header {
 .pagination-prev {
   transform: translateY(1px) rotate(180deg);
 }
-.pagination-btn a {
-  text-decoration: none;
-  color: inherit;
-}
 .pagination-btn[active] a {
   color: cadetblue;
 }
@@ -384,13 +386,11 @@ header {
 }
 .personal-action li {
   width: 50%;
-}
-.personal-action a {
   color: #666;
   font-size: 14px;
-  text-decoration: none;
   line-height: 30px;
-  margin-left: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
 }
 .gap-dashed {
   display: inline-block;
@@ -413,9 +413,8 @@ header {
   margin-bottom: 10px;
   color: #86909c;
 }
-.personal-cteg a {
+.personal-cteg > div {
   color: #666;
-  text-decoration: none;
   margin-left: 10px;
   font-size: 14px;
   line-height: 26px;
@@ -462,7 +461,6 @@ footer a:hover {
 }
 .pige-label a {
   color: #1d2129;
-  text-decoration: none;
 }
 .pige-label a:hover {
   text-decoration: underline;
@@ -501,6 +499,12 @@ footer a:hover {
   padding: 0 30px;
   color: #86909c;
 }
+.detail-delete {
+  cursor: pointer;
+}
+.detail-edit {
+  display: none;
+}
 .detail-action i {
   font-size: 14px;
 }
@@ -530,6 +534,9 @@ footer a:hover {
   cursor: pointer;
   line-height: 22px;
   margin-left: 10px;
+}
+.toc-label:hover {
+  text-decoration: underline;
 }
 h2.toc-label {
   margin-left: 14px;

@@ -3,6 +3,7 @@ package router
 import (
 	"farcai-go/app/api"
 	"farcai-go/middleware"
+	"os"
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
@@ -12,8 +13,10 @@ func init() {
 	s := g.Server()
 	s.Group("/api/v1", func(group *ghttp.RouterGroup) {
 		group.Middleware(middleware.MiddlewareCors)
-		// 注册
-		group.POST("/signup", api.User.Register)
+		// 注册 非生产环境开放
+		if os.Getenv("ENV_MODE") != "PROD" {
+			group.POST("/signup", api.User.Register)
+		}
 		// 登录
 		group.POST("/login", api.User.Login)
 
@@ -28,7 +31,7 @@ func init() {
 		// 添加文章
 		group.POST("/post", api.Post.AddPost)
 		// 更新文章
-		group.PUT("/post", api.Post.AddPost)
+		group.PUT("/post", api.Post.UpdatePost)
 		// 根据ID查询文章
 		group.GET("/post/:id", api.Post.GetPost)
 		// 删除文章
@@ -48,4 +51,6 @@ func init() {
 	s.BindHandler("/pigeonhole", api.Html.Pigeonhole)
 	// 分类
 	s.BindHandler("/c/:cid", api.Html.Category)
+	// 自定义页面
+	s.BindHandler("/:custom", api.Html.CustomPage)
 }

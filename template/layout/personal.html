@@ -1,22 +1,25 @@
 <div class="personal">
   <div class="personal-box">
-    <img class="personal-avatar" src="${.Avatar}" alt="${.UserName}">
+    <img class="personal-avatar" src="${.Avatar}" alt="${.UserName}" />
     <h1 class="personal-name">${.UserName}</h1>
     <p class="personal-desc">${.UserDesc}</p>
     <span class="gap-dashed"></span>
     <ul class="personal-action">
       <li>
-        <a 
-        class="iconfont icon-github" href="${.Github}" target="_blank"> GitHub</a>
+        <i class="iconfont icon-github"></i>
+        <a href="${.Github}" target="_blank"> GitHub</a>
       </li>
       <li>
-        <a class="iconfont icon-gitee2" href="${.Gitee}" target="_blank"> Gitee</a>
+        <i class="iconfont icon-gitee2"></i>
+        <a href="${.Gitee}" target="_blank"> Gitee</a>
       </li>
       <li>
-        <a class="iconfont icon-xinlangweibo" href="${.Weibo}" target="_blank"> 微博</a>
+        <i class="iconfont icon-xinlangweibo"></i>
+        <a href="${.Weibo}" target="_blank"> 微博</a>
       </li>
       <li>
-        <a class="iconfont icon-zhihu-circle" href="${.Zhihu}" target="_blank"> 知乎</a>
+        <i class="iconfont icon-zhihu-circle"></i>
+        <a href="${.Zhihu}" target="_blank"> 知乎</a>
       </li>
     </ul>
   </div>
@@ -25,7 +28,10 @@
     <div class="personal-cteg">
       <h2>分类：</h2>
       ${range $index,$elem := .categorys}
-      <a class="iconfont icon-fenlei-copy" href="/c/${$elem.Cid}">&nbsp;${$elem.Name}</a>
+      <div>
+        <i class="iconfont icon-fenlei-copy"></i>
+        <a href="/c/${$elem.Cid}">${$elem.Name}</a>
+      </div>
       ${end}
     </div>
   </div>

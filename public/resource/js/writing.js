@@ -3,7 +3,6 @@ var TITLE_KEY = "CACHE_TITLE"; // 标题缓存key
 var AUTO_SAVE_TIME = 5000; // 自动保存时间
 var cos = null;
 var MdEditor = null;
-var currentCategory;
 var headInput = null;
 var ArticleItem = {};
 
@@ -59,10 +58,9 @@ function initCOS() {
         type: "GET",
         contentType: "application/json",
         success: function (res) {
-          if (res.code == !200) return alert(res.error);
+          if (res.code !== 200) return alert(res.error);
           var data = res.data || {};
           var credentials = data.Credentials || {};
-          console.log("data", data);
           var params = {
             TmpSecretId: credentials.TmpSecretId,
             TmpSecretKey: credentials.TmpSecretKey,
@@ -85,14 +83,28 @@ function getArticleItem(id) {
     type: "GET",
     contentType: "application/json",
     success: function (res) {
-      if (res.code == !200) return alert(res.error);
+      if (res.code != 200) {
+        initEditor();
+        return alert(res.error);
+      }
       ArticleItem = res.data || {};
+      initActive();
       initEditor();
     },
     beforeSend: setAjaxToken,
   });
 }
-
+function initActive() {
+  $(".category li[value=" + ArticleItem.categoryId + "]")
+    .addClass("active")
+    .siblings()
+    .removeClass("active");
+  $(".type-box li[value=" + ArticleItem.categoryId + "]")
+    .addClass("active")
+    .siblings()
+    .removeClass("active");
+  $(".slug-input").val(ArticleItem.slug);
+}
 function initCache() {
   headInput = $(".header-input");
   var query = new URLSearchParams(location.search);
@@ -118,11 +130,15 @@ function clearHandler() {
 
 // 发布
 function publishHandler() {
-  if (!currentCategory) return $(".publish-tip").text("请选择分类");
+  if (!ArticleItem.categoryId) return $(".publish-tip").text("请选择分类");
+  ArticleItem.slug = $(".slug-input").val();
+  if (ArticleItem.type == 1 && !ArticleItem.slug)
+    return $(".publish-tip").text("请输入自定义链接");
   ArticleItem.title = headInput.val();
+  if (!ArticleItem.title) return $(".publish-tip").text("请输入标题");
   ArticleItem.markdown = MdEditor.getMarkdown();
+  if (!ArticleItem.markdown) return $(".publish-tip").text("正文");
   ArticleItem.content = MdEditor.getHTML();
-  ArticleItem.categoryId = currentCategory;
 
   $.ajax({
     url: "/api/v1/post",
@@ -130,7 +146,8 @@ function publishHandler() {
     contentType: "application/json",
     data: JSON.stringify(ArticleItem),
     success: function (res) {
-      if (res.code == !200) return alert(res.error);
+      if (res.code !== 200) return alert(res.error);
+      if (ArticleItem.pid) return;
       ArticleItem = res.data || {};
       if (!ArticleItem.pid) {
         clearHandler();
@@ -161,13 +178,22 @@ $(function () {
   $(".publish-close").click(function () {
     drop.hide();
   });
+  $(".cancel-btn").click(function () {
+    drop.hide();
+  });
   // 发布逻辑
   $(".publish-btn").click(publishHandler);
   // 选择分类
   $(".category").on("click", "li", function (event) {
     var target = $(event.target);
     target.addClass("active").siblings().removeClass("active");
-    currentCategory = target.attr("value");
+    ArticleItem.categoryId = target.attr("value");
     $(".publish-tip").text("");
+  });
+  // 选择类型
+  $(".type-box").on("click", "li", function (event) {
+    var target = $(event.target);
+    target.addClass("active").siblings().removeClass("active");
+    ArticleItem.type = Number(target.attr("value") || 0);
   });
 });

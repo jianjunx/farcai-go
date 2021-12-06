@@ -32,3 +32,19 @@ CREATE TABLE `tbl_blog_post`(
   primary key (pid),
   unique key idx_pid (`pid`) using btree
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+CREATE TABLE `tbl_blog_post`(
+  `pid` int not null AUTO_INCREMENT,
+  `title` varchar(255) not null,
+  `content` LONGTEXT not null,
+  `markdown` LONGTEXT not null,
+  `category_id` int not null,
+  `user_id` BIGINT(20) not null,
+  `view_count`  int not null DEFAULT 0,
+  `type` int not null DEFAULT 0
+  `slug` varchar(255),
+  `create_at` TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
+  `update_at` TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  primary key (pid),
+  unique key idx_pid (`pid`) using btree
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;

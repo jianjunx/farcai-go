@@ -21,8 +21,8 @@
     DefaultFile = "index.html"
     Delimiters  =  ["${", "}"]
     [viewer.Data]
-        Title = "JJXie"
-        Description = "JJXie的个人博客"
+        Title = "JJ Xie"
+        Description = "JJ Xie 谢建军的个人博客"
         Logo = "/resource/images/logo.png"
         Navigation = ["首页","/", "归档","/pigeonhole", "关于","/about"]
         Github = "https://github.com/jianjunx"
@@ -31,7 +31,7 @@
         Weibo = "https://weibo.com/autoshun"
         Avatar = "https://jianjun-1251280787.cos.ap-nanjing.myqcloud.com/assets/avatar_mini.png"
         UserName = "JJ Xie"
-        UserDesc = "天上白玉京,十二楼五城 仙人抚我顶,结发受长生"
+        UserDesc = "一位头发乌黑浓密，不穿格子衫，长得还帅的程序员."
         CdnURL = "//jianjunxie.gitee.io/es6/md-assets"
 
 # cos

@@ -1,12 +1,17 @@
 package jwt
 
 import (
+	"os"
 	"time"
 
 	gojwt "github.com/dgrijalva/jwt-go"
 )
 
-var jwtKey = []byte("new.bell")
+var jwtKey []byte
+
+func init() {
+	jwtKey = []byte(os.Getenv("JWT_SECRET"))
+}
 
 type Claims struct {
 	Uid int
