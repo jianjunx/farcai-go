@@ -92,3 +92,7 @@ Salt # 加盐 默认是：_farcai_salt，也可以在index.js里修改成自己�
 ### TOC
 
 要开启 TOC 需要在文章底部添加`[TOC]`，这是会自动生成 TOC
+
+### 评论
+
+在config.toml文件中开启```Valine = true```并配置相应的id和key，参考[Valine](https://valine.js.org/quickstart.html)
