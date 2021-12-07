@@ -96,3 +96,6 @@ Salt # 加盐 默认是：_farcai_salt，也可以在index.js里修改成自己�
 ### 评论
 
 在config.toml文件中开启```Valine = true```并配置相应的id和key，参考[Valine](https://valine.js.org/quickstart.html)
+
+## License
+[MulanPSL-2.0](https://github.com/jianjunx/farcai-go/blob/master/LICENSE)
