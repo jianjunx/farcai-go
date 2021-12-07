@@ -102,7 +102,7 @@ function initActive() {
     .addClass("active")
     .siblings()
     .removeClass("active");
-  $(".type-box li[value=" + ArticleItem.categoryId + "]")
+  $(".type-box li[value=" + ArticleItem.type + "]")
     .addClass("active")
     .siblings()
     .removeClass("active");
