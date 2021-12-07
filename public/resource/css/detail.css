@@ -83,7 +83,8 @@
 }
 
 .detail-content input {
-  font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol";
 }
 
 .detail-content a {
@@ -203,7 +204,7 @@
 }
 
 .detail-content .octicon-link:before {
-  content: '\f05c';
+  content: "\f05c";
 }
 
 .detail-content > *:first-child {
@@ -426,6 +427,8 @@
   max-width: 100%;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  margin: 20px 0;
+  cursor: zoom-in;
 }
 .detail-content code {
   padding: 0;
@@ -491,5 +494,116 @@
 .detail-content pre code:after {
   content: normal;
 }
+
+.zoom-prev {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 99;
+  transition: all 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+  cursor: zoom-out;
+}
+.zoom-container {
+  width: calc(100% - 200px);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 0 auto;
+}
+
+.vcomments {
+  padding: 20px;
+}
+.vcomments-gap {
+  margin-top: 30px;
+}
+.vcomments-copyright {
+  width: 100%;
+  text-align: right;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #999;
+  font-size: 12px;
+}
+.vcopy {
+  display: none;
+}
+
 /*! Color themes for Google Code Prettify | MIT License | github.com/jmblog/color-themes-for-google-code-prettify */
-.prettyprint{background:#2f3640;font-family:Menlo,Bitstream Vera Sans Mono,DejaVu Sans Mono,Monaco,Consolas,monospace;border:0!important}.pln{color:#e6e9ed}ol.linenums{margin-top:0;margin-bottom:0;color:#656d78}li.L0,li.L1,li.L2,li.L3,li.L4,li.L5,li.L6,li.L7,li.L8,li.L9{padding-left:1em;background-color:#2f3640;list-style-type:decimal}@media screen{.str{color:#ffce54}.kwd{color:#4fc1e9}.com{color:#656d78}.typ{color:#4fc1e9}.lit{color:#ac92ec}.pun{color:#e6e9ed}.opn{color:#e6e9ed}.clo{color:#e6e9ed}.tag{color:#ed5565}.atn{color:#a0d468}.atv{color:#ffce54}.dec{color:#ac92ec}.var{color:#e6e9ed}.fun{color:#e6e9ed}}
+.prettyprint {
+  background: #2f3640;
+  font-family: Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, Monaco,
+    Consolas, monospace;
+  border: 0 !important;
+}
+.pln {
+  color: #e6e9ed;
+}
+ol.linenums {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #656d78;
+}
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L4,
+li.L5,
+li.L6,
+li.L7,
+li.L8,
+li.L9 {
+  padding-left: 1em;
+  background-color: #2f3640;
+  list-style-type: decimal;
+}
+@media screen {
+  .str {
+    color: #ffce54;
+  }
+  .kwd {
+    color: #4fc1e9;
+  }
+  .com {
+    color: #656d78;
+  }
+  .typ {
+    color: #4fc1e9;
+  }
+  .lit {
+    color: #ac92ec;
+  }
+  .pun {
+    color: #e6e9ed;
+  }
+  .opn {
+    color: #e6e9ed;
+  }
+  .clo {
+    color: #e6e9ed;
+  }
+  .tag {
+    color: #ed5565;
+  }
+  .atn {
+    color: #a0d468;
+  }
+  .atv {
+    color: #ffce54;
+  }
+  .dec {
+    color: #ac92ec;
+  }
+  .var {
+    color: #e6e9ed;
+  }
+  .fun {
+    color: #e6e9ed;
+  }
+}

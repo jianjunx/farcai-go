@@ -33,6 +33,9 @@
         UserName = "JJ Xie"
         UserDesc = "一位头发乌黑浓密，不穿格子衫，长得还帅的程序员."
         CdnURL = "//jianjunxie.gitee.io/es6/md-assets"
+        Valine = true
+        ValineAppid = "UT7JUprfJLmJU9k2fLPDOaqP-MdYXbMMI"
+        ValineAppkey = "lD6RiiGKU3H8m57HOFLHwv88"
 
 # cos
 [cos]

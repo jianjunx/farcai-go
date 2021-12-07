@@ -112,6 +112,7 @@ function deleteDetail(id) {
 function tocInit() {
   var tocBox = $("#toc-box");
   if (tocBox.length == 0) return;
+  imageZoom();
   var mdTocList = $(".markdown-toc-list");
   // 如果有TOC
   if (mdTocList.length > 0 && mdTocList.children().length > 0) {
@@ -121,6 +122,19 @@ function tocInit() {
     $(".detail-left").css("width", "100%");
     $(".detail-right").hide();
   }
+}
+function imageZoom() {
+  var zoom = $(".zoom-prev");
+  $(".detail-content").on("click", "img", function (event) {
+    $(".zoom-container").css(
+      "background-image",
+      "url(" + $(event.target).attr("src") + ")"
+    );
+    zoom.show();
+  });
+  zoom.click(function () {
+    zoom.hide();
+  });
 }
 function tocScrollTo(tocBox) {
   // 组织默认事件

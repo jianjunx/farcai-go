@@ -1,5 +1,7 @@
-<link rel="stylesheet" href="/resource/css/detail.css">
-
+<link rel="stylesheet" href="/resource/css/detail.css" />
+${if .Valine}
+<script src="https://cdn.bootcdn.net/ajax/libs/valine/1.4.9/Valine.min.js"></script>
+${end}
 <div class="detail">
   <div class="detail-left">
     <h1 class="detail-title">${.article.Title}</h1>
@@ -30,9 +32,12 @@
       </span>
     </div>
     <div class="gap-solid"></div>
-    <div id="view-content" class="detail-content">
-      ${.article.Content}
-    </div>
+    <div id="view-content" class="detail-content">${.article.Content}</div>
+    ${if .Valine}
+    <div class="gap-solid vcomments-gap"></div>
+    <div id="vcomments" class="vcomments"></div>
+    <div class="vcomments-copyright">Comment Powered By Valine</div>
+    ${end}
   </div>
   <div class="detail-right">
     <div class="toc-card">
@@ -41,3 +46,16 @@
     </div>
   </div>
 </div>
+<div class="zoom-prev">
+  <div class="zoom-container"></div>
+</div>
+${if .Valine}
+<script>
+  new Valine({
+    el: "#vcomments",
+    appId: "${.ValineAppid}",
+    appKey: "${.ValineAppkey}",
+    placeholder: "What are you talking about?"
+  });
+</script>
+${end}
