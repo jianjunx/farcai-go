@@ -532,34 +532,19 @@ footer a:hover {
   margin-bottom: 10px;
 }
 .toc-box {
-  overflow: hidden;
+  margin-left: 10px;
+  /* overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
 }
-.toc-label {
-  font-size: 12px;
-  cursor: pointer;
-  line-height: 22px;
+.toc-box ul {
   margin-left: 10px;
 }
-.toc-label:hover {
-  text-decoration: underline;
+.toc-box li {
+  line-height: 20px;
+  font-size: 12px;
+  color:#666
 }
-h2.toc-label {
-  margin-left: 14px;
-}
-h3.toc-label {
-  margin-left: 18px;
-}
-h4.toc-label {
-  margin-left: 22px;
-}
-h5.toc-label {
-  margin-left: 26px;
-}
-h6.toc-label {
-  margin-left: 30px;
-}
-.toc-label.active {
+.toc-box .active {
   color: cadetblue;
 }

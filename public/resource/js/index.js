@@ -112,25 +112,31 @@ function deleteDetail(id) {
 function tocInit() {
   var tocBox = $("#toc-box");
   if (tocBox.length == 0) return;
-  var titles = $(
-    "#view-content h1,#view-content h2,#view-content h3,#view-content h4,#view-content h5,#view-content h6"
-  );
-  var len = titles.length;
-  if (len === 0) return;
-  for (var i = 0; i < len; i++) {
-    var ele = titles[i];
-    const item = $(ele).clone();
-    item.addClass("toc-label");
-    item.attr("id", ele.id + "_sub");
-    tocBox.append(item);
+  var mdTocList = $(".markdown-toc-list");
+  // 如果有TOC
+  if (mdTocList.length > 0 && mdTocList.children().length > 0) {
+    tocBox.append(mdTocList);
+    tocScrollTo(tocBox);
+  } else {
+    $(".detail-left").css("width", "100%");
+    $(".detail-right").hide();
   }
-  tocScrollTo(tocBox);
 }
 function tocScrollTo(tocBox) {
-  tocBox.click(function (event) {
-    $(event.target).addClass("active").siblings().removeClass("active");
-    var id = event.target.id.replace("_sub", "");
-    var top = document.getElementById(id).offsetTop;
+  // 组织默认事件
+  var all = document.querySelectorAll("#toc-box a");
+  for (var i = 0, len = all.length; i < len; i++) {
+    all[i].href = "javascript:void(0)";
+  }
+  var prvEle = null;
+  tocBox.on("click", "a", function (event) {
+    event.stopPropagation();
+    ele = $(event.target);
+    ele.addClass("active");
+    if (prvEle) prvEle.removeClass("active");
+    prvEle = ele;
+    var _href = $(event.target).text();
+    var top = $("a[name='" + _href + "']").offset().top;
     window.scrollTo(0, top - 80);
   });
 }
