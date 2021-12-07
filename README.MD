@@ -70,17 +70,25 @@ docker run --env-file ./local.env -p 3200:3100 --name farcai-server -d -v /home/
 Pass # 明文密码
 Salt # 加盐 默认是：_farcai_salt，也可以在index.js里修改成自己的
 ```
+
 注册完在页面登录一下
 
 ### 添加分类
+
 地址：/api/v1/category POST
-请求头：Authorization=打开浏览器调试从页面localstore里面取
+请求头：Authorization=打开浏览器调试从页面 localstore 里面取
+
 ```json
 {
-    "name": "Golang"
+  "name": "Golang"
 }
 ```
 
 ### 添加自定也页面
+
 添加自定义页面与添加文章相同，在发布弹窗下选择自定义页，并填写自定义链接。
-访问时地址就是```host/自定义链接```，网页标题就是添加的文章标题。
+访问时地址就是`host/自定义链接`，网页标题就是添加的文章标题。
+
+### TOC
+
+要开启 TOC 需要在文章底部添加`[TOC]`，这是会自动生成 TOC

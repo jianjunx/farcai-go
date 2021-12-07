@@ -17,13 +17,16 @@ function initEditor() {
     width: "99.5%",
     height: window.innerHeight - 78,
     syncScrolling: "single",
+    editorTheme: "default",
     path: CNDURL + "/lib/",
     placeholder: "",
     appendMarkdown: ArticleItem.markdown,
+    codeFold : true,
     saveHTMLToTextarea: true,
-    tocm: true,
+    // tocm: true,
     imageUpload: true,
-    emoji: true,
+    taskList : true,
+    // emoji: true,
     imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
     // imageUploadURL: "/api/v1/uploadfile",
     imageUploadCalback: function (files, cb) {
@@ -138,7 +141,7 @@ function publishHandler() {
   if (!ArticleItem.title) return $(".publish-tip").text("请输入标题");
   ArticleItem.markdown = MdEditor.getMarkdown();
   if (!ArticleItem.markdown) return $(".publish-tip").text("正文");
-  ArticleItem.content = MdEditor.getHTML();
+  ArticleItem.content = MdEditor.getPreviewedHTML();
 
   $.ajax({
     url: "/api/v1/post",
