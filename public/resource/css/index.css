@@ -111,9 +111,7 @@ section {
 body {
   line-height: 1;
 }
-menu,
-ol,
-ul {
+menu {
   list-style: none;
 }
 blockquote,
@@ -163,6 +161,9 @@ header {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+}
+.header-wrap ul {
+  list-style: none;
 }
 .header-left,
 .header-right {
@@ -295,7 +296,8 @@ header {
   color: #86909c;
 }
 /* POST */
-.post-label {
+.post-box {
+  list-style: none;
 }
 .post-label + .post-label {
   border-top: 1px solid #f1f1f1;
@@ -336,6 +338,7 @@ header {
   margin-bottom: 10px;
   display: flex;
   justify-content: flex-end;
+  list-style: none;
 }
 .pagination li {
   margin-left: 18px;
@@ -383,6 +386,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   margin-top: 12px;
+  list-style: none;
 }
 .personal-action li {
   width: 50%;
@@ -438,6 +442,10 @@ footer a:hover {
   text-decoration: underline;
 }
 /* pige 归档 */
+.pige-content {
+  margin: 20px;
+  list-style: square;
+}
 .pige-box {
   padding: 10px;
   box-sizing: border-box;

@@ -17,6 +17,7 @@ function initEditor() {
     width: "99.5%",
     height: window.innerHeight - 78,
     syncScrolling: "single",
+    editorTheme: "default",
     path: CNDURL + "/lib/",
     placeholder: "",
     appendMarkdown: ArticleItem.markdown,
@@ -138,7 +139,7 @@ function publishHandler() {
   if (!ArticleItem.title) return $(".publish-tip").text("请输入标题");
   ArticleItem.markdown = MdEditor.getMarkdown();
   if (!ArticleItem.markdown) return $(".publish-tip").text("正文");
-  ArticleItem.content = MdEditor.getHTML();
+  ArticleItem.content = MdEditor.getPreviewedHTML();
 
   $.ajax({
     url: "/api/v1/post",
