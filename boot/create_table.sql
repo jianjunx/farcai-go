@@ -41,7 +41,7 @@ CREATE TABLE `tbl_blog_post`(
   `category_id` int not null,
   `user_id` BIGINT(20) not null,
   `view_count`  int not null DEFAULT 0,
-  `type` int not null DEFAULT 0
+  `type` int not null DEFAULT 0,
   `slug` varchar(255),
   `create_at` TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
   `update_at` TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

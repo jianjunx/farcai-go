@@ -33,7 +33,11 @@ ${end}
     </div>
     <div class="gap-solid"></div>
     <div id="view-content" class="detail-content">${.article.Content}</div>
-    <div id="vcomments"></div>
+    ${if .Valine}
+    <div class="gap-solid vcomments-gap"></div>
+    <div id="vcomments" class="vcomments"></div>
+    <div class="vcomments-copyright">Comment Powered By Valine</div>
+    ${end}
   </div>
   <div class="detail-right">
     <div class="toc-card">
@@ -51,8 +55,7 @@ ${if .Valine}
     el: "#vcomments",
     appId: "${.ValineAppid}",
     appKey: "${.ValineAppkey}",
-    region: "us",
-    serverURLs: "${.ValineServerURL}"
+    placeholder: "What are you talking about?"
   });
 </script>
 ${end}
