@@ -147,7 +147,7 @@ function publishHandler() {
     data: JSON.stringify(ArticleItem),
     success: function (res) {
       if (res.code !== 200) return alert(res.error);
-      if (ArticleItem.pid) return;
+      if (ArticleItem.pid) return $(".publish-tip").text("更新成功");
       ArticleItem = res.data || {};
       if (!ArticleItem.pid) {
         clearHandler();

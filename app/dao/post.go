@@ -37,7 +37,7 @@ func (*postDao) GetPostPages(cid, page *int) (*gdb.Result, int, error) {
 		defer ws.Done()
 		mod := addWhere(postModel("p"), cid)
 		field := "p.pid,p.title,p.content,p.view_count,p.create_at,p.user_id,p.category_id,c.name as category_name,u.user_name as user_name"
-		result, err = mod.LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields(&field).OrderDesc("pid").Offset(10 * (*page - 1)).Limit(10).All()
+		result, err = mod.LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields(field).OrderDesc("pid").Offset(10 * (*page - 1)).Limit(10).All()
 	}()
 	ws.Wait()
 	return &result, total, err
@@ -50,7 +50,7 @@ func (*postDao) GetPostAll() (gdb.Result, error) {
 // 根据id获取文章
 func (*postDao) GetPostItem(pid *int) (gdb.Record, error) {
 	field := "p.*,c.name as category_name,u.user_name as user_name"
-	return postModel("p").LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields(&field).WherePri(pid).One()
+	return postModel("p").LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields(field).WherePri(pid).One()
 }
 
 // 获取自定义文章
@@ -69,7 +69,6 @@ func (*postDao) UpdatePostItem(post *model.PostReq) (sql.Result, error) {
 		"content":     post.Content,
 		"markdown":    post.Markdown,
 		"category_id": post.CategoryId,
-		"user_id":     post.UserId,
 		"type":        post.Type,
 		"slug":        post.Slug,
 	}).WherePri(post.Pid).Update()
