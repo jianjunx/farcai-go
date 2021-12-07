@@ -508,7 +508,7 @@
   cursor: zoom-out;
 }
 .zoom-container {
-  width: calc(100% - 200px);
+  width: 90%;
   height: 100%;
   background-repeat: no-repeat;
   background-position: center;
