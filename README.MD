@@ -45,7 +45,7 @@ $ make image
 
 ```bash
 # 运行镜像 加载本地local.env环境变量 映射3200端口 将logs文件夹与本地home/log映射
-docker run --env-file ./local.env -p 3200:3100 --name farcai-server -d -v /home/logs:/logs farcai:镜像名和版本号
+docker run --env-file ./env/farcai.env -p 3000:3100 --name farcai-server -d -v /home/logs/farcai:/tmp/logs farcai:镜像名和版本号
 ```
 
 # 功能说明
