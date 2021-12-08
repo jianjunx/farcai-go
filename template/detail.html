@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/resource/css/detail.css" />
 ${if .Valine}
-<script src="https://cdn.bootcdn.net/ajax/libs/valine/1.4.9/Valine.min.js"></script>
+<script src="${.CdnURL}/valine.min.js"></script>
 ${end}
 <div class="detail">
   <div class="detail-left">
@@ -55,6 +55,7 @@ ${if .Valine}
     el: "#vcomments",
     appId: "${.ValineAppid}",
     appKey: "${.ValineAppkey}",
+    serverURLs: "${.ValineServerURL}",
     placeholder: "What are you talking about?"
   });
 </script>

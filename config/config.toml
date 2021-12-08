@@ -36,6 +36,7 @@
         Valine = true
         ValineAppid = "UT7JUprfJLmJU9k2fLPDOaqP-MdYXbMMI"
         ValineAppkey = "lD6RiiGKU3H8m57HOFLHwv88"
+        ValineServerURL = "//ut7juprf.api.lncldglobal.com"
 
 # cos
 [cos]
