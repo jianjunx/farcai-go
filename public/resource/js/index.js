@@ -3,21 +3,27 @@ var USER_KEY = "USER_INFO";
 var SALT = "_farcai_salt"; // 加盐
 
 $(function () {
+  // 登录
   loginLogic();
+  // 归档
   pagination();
+  // toc
   tocInit();
+  // 编辑和删除
   initEditLogic();
+  // 顶部选中
   headerActive();
+  // 归档排序
+  initPigeSort();
 });
+
 function setAjaxToken(xhr) {
   xhr.setRequestHeader("Authorization", localStorage.getItem("AUTH_TOKEN"));
 }
+
 function headerActive() {
   var nav = $('a[href="' + location.pathname + '"]');
-  if (nav.length == 0) {
-    // $('a[href="/"]').addClass("active");
-    return;
-  }
+  if (nav.length == 0) return;
   nav.addClass("active");
 }
 function initEditLogic() {
@@ -153,4 +159,14 @@ function tocScrollTo(tocBox) {
     var top = $("a[name='" + _href + "']").offset().top;
     window.scrollTo(0, top - 80);
   });
+}
+
+function initPigeSort() {
+  var box = $(".pige-content");
+  if (box.length == 0) return;
+  var children = box.children();
+  // 翻转排序
+  for (var i = children.length; i >= 0; i--) {
+    box.append(children[i]);
+  }
 }

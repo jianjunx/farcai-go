@@ -2,7 +2,7 @@
 <div class="container-right">
   <ul class="pige-content">
     ${range $key,$value := .lines}
-    <li class="pige-box">
+    <li class="pige-box" key="${$key}">
       <h1 class="pige-month iconfont icon-wenjianjia">&nbsp;${$key}</h1>
       <ul class="pige-wrap">
         ${range $index,$elem := $value}
