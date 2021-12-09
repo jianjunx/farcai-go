@@ -14,13 +14,13 @@ var Html = &htmlApi{}
 
 type htmlApi struct{}
 
+// 首页
 func (*htmlApi) Home(r *ghttp.Request) {
 	page := r.GetQueryInt("page", 1)
 	ctgId := r.GetQueryInt("cid")
 	posts, categorys, total, err := service.Html.Home(&ctgId, &page)
 	if err != nil {
 		service.ErrorHandler(r, err)
-		return
 	}
 	pages := service.Html.GetPages(float64(total))
 	r.Response.WriteTpl("layout.html", g.Map{
@@ -34,17 +34,16 @@ func (*htmlApi) Home(r *ghttp.Request) {
 	})
 }
 
+// 文章详情页
 func (*htmlApi) Detail(r *ghttp.Request) {
 	ids := strings.Split(r.GetString("id"), ".")
 	if len(ids) == 0 {
 		service.ErrorHandler(r, errors.New("ID错误"))
-		return
 	}
 	id := gconv.Int(ids[0])
 	article, err := service.Html.Detail(&id)
 	if err != nil {
 		service.ErrorHandler(r, err)
-		return
 	}
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":    "detail.html",
@@ -55,11 +54,11 @@ func (*htmlApi) Detail(r *ghttp.Request) {
 	go service.Html.AddViewCount(&article.Pid)
 }
 
+// 编辑器 写作页
 func (*htmlApi) Writing(r *ghttp.Request) {
 	categorys, err := service.Category.GetCategorys()
 	if err != nil {
 		service.ErrorHandler(r, err)
-		return
 	}
 	r.Response.WriteTpl("writing.html", g.Map{
 		"categorys": categorys,
@@ -69,6 +68,7 @@ func (*htmlApi) Writing(r *ghttp.Request) {
 	})
 }
 
+// 登录页
 func (*htmlApi) Login(r *ghttp.Request) {
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":  "login.html",
@@ -76,11 +76,11 @@ func (*htmlApi) Login(r *ghttp.Request) {
 	})
 }
 
+// 归档页面
 func (*htmlApi) Pigeonhole(r *ghttp.Request) {
 	lines, categorys, err := service.Html.Pigeonhole()
 	if err != nil {
 		service.ErrorHandler(r, err)
-		return
 	}
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":      "pigeonhole.html",
@@ -90,17 +90,16 @@ func (*htmlApi) Pigeonhole(r *ghttp.Request) {
 	})
 }
 
+// 分类页
 func (*htmlApi) Category(r *ghttp.Request) {
 	page := r.GetQueryInt("page", 1)
 	ctgId := r.GetInt("cid", 0)
 	if ctgId == 0 {
 		r.Response.RedirectTo("/")
-		return
 	}
 	posts, categorys, total, err := service.Html.Home(&ctgId, &page)
 	if err != nil {
 		service.ErrorHandler(r, err)
-		return
 	}
 	categoryName := ""
 	if len(*posts) > 0 {
@@ -111,7 +110,7 @@ func (*htmlApi) Category(r *ghttp.Request) {
 	pages := service.Html.GetPages(float64(total))
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":         "category.html",
-		"title":        categoryName,
+		"title":        categoryName, // 副标题
 		"posts":        posts,
 		"categorys":    categorys,
 		"categoryName": categoryName,
@@ -122,20 +121,19 @@ func (*htmlApi) Category(r *ghttp.Request) {
 	})
 }
 
+// 自定义页面
 func (*htmlApi) CustomPage(r *ghttp.Request) {
 	custom := r.GetString("custom")
 	empt, post, err := service.Html.Custom(&custom)
 	if empt {
 		r.Response.RedirectTo("/")
-		return
 	}
 	if err != nil {
 		service.ErrorHandler(r, err)
-		return
 	}
 	r.Response.WriteTpl("layout.html", g.Map{
 		"main":    "custom.html",
-		"title":   post.Title,
+		"title":   post.Title, // 副标题
 		"article": post,
 	})
 	// 累计查看次数

@@ -29,17 +29,19 @@ func (*postDao) GetPostPages(cid, page *int) (*gdb.Result, int, error) {
 		ws     sync.WaitGroup
 	)
 	ws.Add(2)
+	// 查总数
 	go func() {
 		defer ws.Done()
 		total, err = addWhere(postModel(), cid).Count()
 	}()
+	// 查列表数据
 	go func() {
 		defer ws.Done()
 		mod := addWhere(postModel("p"), cid)
 		field := "p.pid,p.title,p.content,p.view_count,p.create_at,p.user_id,p.category_id,c.name as category_name,u.user_name as user_name"
 		result, err = mod.LeftJoin("tbl_blog_user u", "p.user_id=u.uid").LeftJoin("tbl_blog_category c", "p.category_id=c.cid").Fields(field).OrderDesc("pid").Offset(10 * (*page - 1)).Limit(10).All()
 	}()
-	ws.Wait()
+	ws.Wait() // 等待所有协程执行完
 	return &result, total, err
 }
 
