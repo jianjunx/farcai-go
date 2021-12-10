@@ -39,7 +39,6 @@
 .detail-content pre {
   overflow: auto;
 }
-
 .detail-content code,
 .detail-content kbd,
 .detail-content pre {
@@ -438,7 +437,7 @@
   font-size: 85%;
   background-color: rgba(0, 0, 0, 0.04);
   border-radius: 3px;
-  color: red;
+  color: #ed5565;
 }
 
 .detail-content code:before,
@@ -455,6 +454,7 @@
   white-space: pre;
   background: transparent;
   border: 0;
+  /* color: #fff; */
 }
 .detail-content .highlight {
   margin-bottom: 16px;
