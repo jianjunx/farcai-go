@@ -28,7 +28,7 @@ func init() {
 
 	Option = getOpt()
 }
-
+// 配置项
 func getOpt() *sts.CredentialOptions {
 	return &sts.CredentialOptions{
 		DurationSeconds: int64(time.Hour.Seconds()),

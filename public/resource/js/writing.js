@@ -21,11 +21,11 @@ function initEditor() {
     path: CNDURL + "/lib/",
     placeholder: "",
     appendMarkdown: ArticleItem.markdown,
-    codeFold : true,
+    codeFold: true,
     saveHTMLToTextarea: true,
     // tocm: true,
     imageUpload: true,
-    taskList : true,
+    taskList: true,
     // emoji: true,
     imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
     // imageUploadURL: "/api/v1/uploadfile",
@@ -166,10 +166,12 @@ $(function () {
   // 初始化缓存
   initCache();
   // 返回首页
-  $(".home-btn").click(function () {
+  var back = $(".home-btn");
+  back.click(function () {
     saveHandler();
-    location.href = "/";
+    location.href = ArticleItem.pid ? "/p/" + ArticleItem.pid + ".html" : "/";
   });
+  if (location.search) back.text("查看");
   // 保存
   $(".save-btn").click(saveHandler);
   var drop = $(".publish-drop");

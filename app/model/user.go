@@ -1,11 +1,11 @@
 package model
 
 type User struct {
-	Uid      int    `orm:"uid" json:"uid"`
-	UserName string `orm:"user_name" json:"userName"`
-	Avatar   string `orm:"avatar" json:"avatar"`
-	Passwd   string `orm:"passwd" json:"-"`
-	CreateAt string `orm:"create_at" json:"createAt"`
+	Uid      int    `orm:"uid" json:"uid"`            // 用户id
+	UserName string `orm:"user_name" json:"userName"` // 用户名
+	Avatar   string `orm:"avatar" json:"avatar"`      // 头像
+	Passwd   string `orm:"passwd" json:"-"`           // 密码
+	CreateAt string `orm:"create_at" json:"createAt"` // 创建时间
 }
 
 type RegisterReq struct {
@@ -19,6 +19,6 @@ type LoginReq struct {
 }
 
 type LoginResp struct {
-	Token    string `json:"token"`
-	UserInfo User   `json:"userInfo"`
+	Token    string `json:"token"`    // token
+	UserInfo User   `json:"userInfo"` // 用户信息
 }

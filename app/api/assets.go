@@ -11,11 +11,11 @@ var Assets = &assetsApi{}
 
 type assetsApi struct{}
 
+// 获取腾讯云临时密钥
 func (*assetsApi) COSCredentials(r *ghttp.Request) {
 	cred, err := service.Assets.COSCredentials()
 	if err != nil {
 		service.ErrorHandler(r, err)
-		return
 	}
 	r.Response.WriteJsonExit(&model.Response{
 		Code: 200,
