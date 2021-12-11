@@ -46,7 +46,7 @@ func (*postDao) GetPostPages(cid, page *int) (*gdb.Result, int, error) {
 }
 
 func (*postDao) GetPostAll() (gdb.Result, error) {
-	return postModel().Fields("pid", "title", "create_at").OrderDesc("pid").All()
+	return postModel().Fields("pid", "title", "create_at").Where("type=0").OrderDesc("pid").All()
 }
 
 // 根据id获取文章
