@@ -72,3 +72,16 @@ func (*postApi) DeletePost(r *ghttp.Request) {
 		Code: 200,
 	})
 }
+
+// 搜索文章
+func (*postApi) SearchPost(r *ghttp.Request) {
+	search := r.GetQueryString("val")
+	posts, err := service.Post.SearchPost(&search)
+	if err != nil {
+		service.ErrorHandler(r, err)
+	}
+	r.Response.WriteJsonExit(model.Response{
+		Code: 200,
+		Data: posts,
+	})
+}

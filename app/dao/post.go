@@ -85,3 +85,8 @@ func (*postDao) DeletePostItem(pid *int) (sql.Result, error) {
 func (*postDao) AddViewCount(pid *int) (sql.Result, error) {
 	return postModel().WherePri(pid).Increment("view_count", 1)
 }
+
+// 搜索结果
+func (*postDao) Search(search *string) (gdb.Result, error) {
+	return postModel().Where("type=? AND title like ?", g.Slice{0, "%" + *search + "%"}).All()
+}

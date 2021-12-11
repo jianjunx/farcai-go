@@ -39,3 +39,8 @@ type PostReq struct {
 	UserId     int    `json:"userId"`
 	Type       int    `json:"type"`
 }
+
+type SearchResp struct {
+	Pid   int    `orm:"pid" json:"pid"` // 文章ID
+	Title string `orm:"title" json:"title"`
+}

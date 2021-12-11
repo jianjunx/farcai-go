@@ -15,6 +15,8 @@ $(function () {
   headerActive();
   // 归档排序
   initPigeSort();
+  // 搜索
+  initSearch();
 });
 
 function setAjaxToken(xhr) {
@@ -168,5 +170,41 @@ function initPigeSort() {
   // 翻转排序
   for (var i = children.length; i >= 0; i--) {
     box.append(children[i]);
+  }
+}
+
+function initSearch() {
+  var timer = null;
+  var searchList = [];
+  var drop = $(".search-drop");
+  var input = $("#search-input");
+  input.on("input", function (event) {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      searchHandler(event.target.value);
+    }, 300);
+  });
+  input.on("blur", function () {
+    if (searchList.length === 0) drop.hide();
+  });
+  function searchHandler(val) {
+    if (!val) return (searchList = []);
+    $.ajax({
+      url: "/api/v1/post/search?val=" + val,
+      contentType: "application/json",
+      success: function (res) {
+        if (res.code == !200) return alert(res.error);
+        var data = res.data || [];
+        searchList = [];
+        if (data.length === 0) return drop.html("");
+        for (var i = 0, len = data.length; i < len; i++) {
+          var item = data[i];
+          searchList.push(
+            "<a href='/p/" + item.pid + ".html'>" + item.title + "<a/>"
+          );
+          drop.show().html(searchList.join(""));
+        }
+      },
+    });
   }
 }

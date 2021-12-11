@@ -43,3 +43,19 @@ func (*postService) GetPostItem(pid *int) (*model.Post, error) {
 	err = record.Struct(post)
 	return post, err
 }
+
+func (*postService) SearchPost(search *string) (*[]model.SearchResp, error) {
+	posts := []model.SearchResp{}
+	res, err := dao.Post.Search(search)
+	if err != nil {
+		return nil, err
+	}
+	if res.IsEmpty() {
+		return &posts, nil
+	}
+	err = res.Structs(&posts)
+	if err != nil {
+		return nil, err
+	}
+	return &posts, nil
+}

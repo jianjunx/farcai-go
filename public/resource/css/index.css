@@ -136,7 +136,9 @@ table {
 body {
   line-height: 1;
   background-color: #f4f5f7;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,apple color emoji,segoe ui emoji,Segoe UI Symbol,noto color emoji;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, apple color emoji,
+    segoe ui emoji, Segoe UI Symbol, noto color emoji;
 }
 /* HEADER */
 header {
@@ -187,6 +189,49 @@ header {
 .header-nav .active {
   color: cadetblue;
 }
+.header-search {
+  position: relative;
+}
+.header-search input {
+  border: 1px solid #f1f1f1;
+  background-color: transparent;
+  outline: none;
+  padding: 8px 10px;
+  padding-right: 30px;
+  border-radius: 4px;
+  width: 230px;
+  color: #86909c;
+}
+.header-search i {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  color: #86909c;
+}
+.search-drop {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: #fff;
+  padding: 10px 0;
+  box-shadow: 0 0 10px #f1f1f1;
+  z-index: 9;
+  border-radius: 6px;
+  min-width: 270px;
+}
+.search-drop a {
+  display: block;
+  padding: 0 12px;
+  line-height: 28px;
+  color: #1d2129;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.search-drop a:hover {
+  background-color: #f1f1f1;
+}
 /* LOGIN */
 .login-btn {
   border: 0;
@@ -196,6 +241,7 @@ header {
   height: 30px;
   border-radius: 2px;
   cursor: pointer;
+  margin-left: 20px;
 }
 .login-end {
   padding: 20px 0 20px 20px;
@@ -543,7 +589,7 @@ footer a:hover {
 .toc-box li {
   line-height: 20px;
   font-size: 12px;
-  color:#666
+  color: #666;
 }
 .toc-box .active {
   color: cadetblue;
