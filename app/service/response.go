@@ -8,8 +8,10 @@ import (
 	"github.com/gogf/gf/util/gvalid"
 )
 
+
+
 func ErrorHandler(r *ghttp.Request, err error) {
-	g.Log().Warning(err.Error())
+	g.Log().Error(err) // 输出log
 	if v, ok := err.(gvalid.Error); ok {
 		r.Response.WriteJsonExit(model.Response{
 			Error: v.Error(),

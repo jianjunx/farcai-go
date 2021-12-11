@@ -7,9 +7,10 @@
 
 # Logger.
 [logger]
-    Path        = "/tmp/logs"
-    Level       = "all"
-    Stdout      = true
+    path        = "/tmp/logs"
+    level       = "ERRO"
+    stdout      = true
+    file        = "{Y-m-d}.log"
 
 [database]
     type = "mysql"
