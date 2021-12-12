@@ -44,8 +44,8 @@ $ make image
 修改项目根目录下的`local.env`配置
 
 ```bash
-# 运行镜像 加载本地local.env环境变量 映射3200端口 将logs文件夹与本地home/log映射
-docker run --env-file ./env/farcai.env -p 3000:3100 --name farcai-server -d -v /home/logs/farcai:/tmp/logs farcai:镜像名和版本号
+# 运行镜像 加载本地.env环境变量文件 映射3000端口 将logs文件夹与本地home/log映射
+docker run --env-file env/blog.env -p 3000:3100 --name blog-v1.0.0 -d -v /home/logs/blog:/tmp/logs farcai:镜像名和版本号
 ```
 
 # 功能说明
