@@ -125,9 +125,11 @@ q:after {
 a {
   text-decoration: none;
   color: inherit;
+  transition: color .3s;
 }
 a:hover {
   text-decoration: underline;
+  color: #448ef6;
 }
 table {
   border-collapse: collapse;
@@ -139,6 +141,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Helvetica Neue, Arial, Noto Sans, sans-serif, apple color emoji,
     segoe ui emoji, Segoe UI Symbol, noto color emoji;
+  color: #1d2129;
 }
 /* HEADER */
 header {
@@ -187,7 +190,7 @@ header {
   margin-left: 20px;
 }
 .header-nav .active {
-  color: cadetblue;
+  color: #448ef6;
 }
 .header-search {
   position: relative;
@@ -198,7 +201,7 @@ header {
   outline: none;
   padding: 8px 10px;
   padding-right: 30px;
-  border-radius: 4px;
+  border-radius: 6px;
   width: 230px;
   color: #86909c;
 }
@@ -219,6 +222,7 @@ header {
   z-index: 9;
   border-radius: 6px;
   min-width: 270px;
+  white-space: nowrap;
 }
 .search-drop a {
   display: block;
@@ -235,11 +239,11 @@ header {
 /* LOGIN */
 .login-btn {
   border: 0;
-  background-color: cadetblue;
+  background-color: #448ef6;
   color: #fff;
   width: 80px;
   height: 30px;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
   margin-left: 20px;
 }
@@ -292,14 +296,14 @@ header {
   font-weight: bold;
 }
 .login input {
-  margin-bottom: 16px;
+  margin-bottom: 22px;
   border: 1px solid #f1f1f1;
   outline: #999;
   width: 220px;
   height: 36px;
   font-size: 14px;
   padding: 0 12px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 .login-tip {
   color: red;
@@ -309,9 +313,10 @@ header {
 }
 .login-submint {
   border: 0;
-  background: cadetblue;
+  background: #448ef6;
   height: 36px;
   color: #fff;
+  border-radius: 4px;
   cursor: pointer;
 }
 /* CONTAINER */
@@ -352,11 +357,10 @@ header {
   margin-bottom: 4px;
   font-size: 20px;
   line-height: 40px;
-  color: #1d2129;
 }
 .post-label p {
   font-size: 14px;
-  color: #86909c;
+  color: #6c757d;
   line-height: 22px;
   width: 100%;
   overflow: hidden;
@@ -393,7 +397,7 @@ header {
   transform: translateY(1px) rotate(180deg);
 }
 .pagination-btn[active] a {
-  color: cadetblue;
+  color: #448ef6;
 }
 /* PERSONAL */
 .personal {
@@ -483,9 +487,6 @@ footer a {
   text-decoration: none;
   color: #1d2129;
 }
-footer a:hover {
-  text-decoration: underline;
-}
 /* pige 归档 */
 .pige-content {
   margin: 20px;
@@ -514,9 +515,6 @@ footer a:hover {
 }
 .pige-label a {
   color: #1d2129;
-}
-.pige-label a:hover {
-  text-decoration: underline;
 }
 
 /* DETAIL */
@@ -592,5 +590,5 @@ footer a:hover {
   color: #666;
 }
 .toc-box .active {
-  color: cadetblue;
+  color: #448ef6;
 }

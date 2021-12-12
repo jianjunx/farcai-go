@@ -1,10 +1,10 @@
 .detail-content {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  color: #333;
+  color: #393e46;
   overflow: hidden;
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.8;
   word-wrap: break-word;
 }
 
@@ -428,6 +428,7 @@
   box-sizing: border-box;
   margin: 20px 0;
   cursor: zoom-in;
+  border-radius: 6px;
 }
 .detail-content code {
   padding: 0;
@@ -465,8 +466,8 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #2f3640;
-  border-radius: 3px;
+  background-color: #002451;
+  border-radius: 6px;
 }
 
 .detail-content .highlight pre {
@@ -533,22 +534,46 @@
 .vpower {
   display: none;
 }
-
+.v[data-class="v"] .vwrap {
+  border-color: #f1f1f1;
+  border-radius: 6px;
+}
+.v[data-class="v"] .vcards .vcard .vh .vmeta .vat {
+  color: #448ef6;
+}
+.v[data-class="v"] .vcards .vcard .vhead .vnick:hover {
+  color: #448ef6;
+}
+.v[data-class="v"] .vwrap .vheader .vinput:focus {
+  border-bottom-color: #448ef6;
+}
+.v[data-class="v"] .vbtn {
+  width: 68px;
+  height: 30px;
+  border-radius: 4px;
+}
+.v[data-class="v"] .vbtn:hover {
+  color: #fff;
+  background-color: #448ef6;
+}
 /*! Color themes for Google Code Prettify | MIT License | github.com/jmblog/color-themes-for-google-code-prettify */
 .prettyprint {
-  background: #2f3640;
-  font-family: Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, Monaco,
-    Consolas, monospace;
+  background: #002451;
+  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
   border: 0 !important;
 }
+
 .pln {
-  color: #e6e9ed;
+  color: #ffffff;
 }
+
+/* Specify class=linenums on a pre to get line numbering */
 ol.linenums {
   margin-top: 0;
   margin-bottom: 0;
-  color: #656d78;
+  color: #7285b7;
 }
+
 li.L0,
 li.L1,
 li.L2,
@@ -560,50 +585,93 @@ li.L7,
 li.L8,
 li.L9 {
   padding-left: 1em;
-  background-color: #2f3640;
+  background-color: #002451;
   list-style-type: decimal;
 }
+
 @media screen {
+
+  /* string content */
+
   .str {
-    color: #ffce54;
+    color: #d1f1a9;
   }
+
+  /* keyword */
+
   .kwd {
-    color: #4fc1e9;
+    color: #ebbbff;
   }
+
+  /* comment */
+
   .com {
-    color: #656d78;
+    color: #7285b7;
   }
+
+  /* type name */
+
   .typ {
-    color: #4fc1e9;
+    color: #bbdaff;
   }
+
+  /* literal value */
+
   .lit {
-    color: #ac92ec;
+    color: #ffc58f;
   }
+
+  /* punctuation */
+
   .pun {
-    color: #e6e9ed;
+    color: #ffffff;
   }
+
+  /* lisp open bracket */
+
   .opn {
-    color: #e6e9ed;
+    color: #ffffff;
   }
+
+  /* lisp close bracket */
+
   .clo {
-    color: #e6e9ed;
+    color: #ffffff;
   }
+
+  /* markup tag name */
+
   .tag {
-    color: #ed5565;
+    color: #ff9da4;
   }
+
+  /* markup attribute name */
+
   .atn {
-    color: #a0d468;
+    color: #ffc58f;
   }
+
+  /* markup attribute value */
+
   .atv {
-    color: #ffce54;
+    color: #99ffff;
   }
+
+  /* declaration */
+
   .dec {
-    color: #ac92ec;
+    color: #ffc58f;
   }
+
+  /* variable name */
+
   .var {
-    color: #e6e9ed;
+    color: #ff9da4;
   }
+
+  /* function name */
+
   .fun {
-    color: #e6e9ed;
+    color: #bbdaff;
   }
 }
