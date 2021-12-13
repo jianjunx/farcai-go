@@ -17,7 +17,7 @@
     link = "test:test@tcp(127.0.0.1:3306)/blog_db"
     backup = true # 开启备份
     # 备份目录
-    backupPath = "./tmp"
+    backupPath = "/tmp/logs"
     # 备份到COS
     backupCOS = true
     # 定时任务表达式 https://goframe.org/pages/viewpage.action?pageId=30736411
