@@ -15,6 +15,9 @@
 [database]
     type = "mysql"
     link = "test:test@tcp(127.0.0.1:3306)/blog_db"
+    backup = true # 开启备份
+    backupPath = "./tmp" # 备份目录
+    backupCOS = true # 备份到COS
 
 # Template.
 [viewer]

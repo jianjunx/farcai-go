@@ -6,6 +6,7 @@ type User struct {
 	Avatar   string `orm:"avatar" json:"avatar"`      // 头像
 	Passwd   string `orm:"passwd" json:"-"`           // 密码
 	CreateAt string `orm:"create_at" json:"createAt"` // 创建时间
+	UpdateAt string `orm:"update_at" json:"-"` // 创建时间
 }
 
 type RegisterReq struct {

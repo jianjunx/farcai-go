@@ -90,3 +90,8 @@ func (*postDao) AddViewCount(pid *int) (sql.Result, error) {
 func (*postDao) Search(search *string) (gdb.Result, error) {
 	return postModel().Where("type=? AND title like ?", g.Slice{0, "%" + *search + "%"}).All()
 }
+
+// 备份文章
+func (*postDao) GetAll() (gdb.Result, error) {
+	return postModel().All()
+}

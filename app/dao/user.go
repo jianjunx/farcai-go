@@ -45,3 +45,7 @@ func (*userDao) AddUserItem(user *model.User) (sql.Result, error) {
 		"passwd":    user.Passwd,
 	}).Insert()
 }
+
+func (*userDao) GetUserAll() (gdb.Result, error) {
+	return userModel().All()
+}
