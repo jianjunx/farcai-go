@@ -2,7 +2,6 @@ package boot
 
 import (
 	"farcai-go/app/service"
-	"fmt"
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcron"
@@ -13,7 +12,6 @@ func backupClock() {
 	if !g.Cfg().GetBool("database.backup") {
 		return
 	}
-	fmt.Println("cron", g.Cfg().GetString("database.backupCron"))
 	// 开启定时任务
 	_, err := gcron.Add(g.Cfg().GetString("database.backupCron"), func() {
 		// 执行备份
