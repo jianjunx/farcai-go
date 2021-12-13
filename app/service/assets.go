@@ -31,10 +31,12 @@ func (*assetsService) BackupPost() {
 		g.Log().Error(err) // 输出log
 		return
 	}
-	_, err = utils.BackupPost(&posts)
+	name, text, err := utils.BackupPost(&posts)
 	if err != nil {
 		g.Log().Error(err) // 输出log
+		return
 	}
+	backupToCOS(name, text)
 }
 
 // 备份分类数据
@@ -50,10 +52,12 @@ func (*assetsService) BackupCategory() {
 		g.Log().Error(err) // 输出log
 		return
 	}
-	_, err = utils.BackupCategory(&ctgs)
+	name, text, err := utils.BackupCategory(&ctgs)
 	if err != nil {
 		g.Log().Error(err) // 输出log
+		return
 	}
+	backupToCOS(name, text)
 }
 
 // 备份用户数据
@@ -69,8 +73,18 @@ func (*assetsService) BackupUser() {
 		g.Log().Error(err) // 输出log
 		return
 	}
-	_, err = utils.BackupUser(&users)
+	name, text, err := utils.BackupUser(&users)
 	if err != nil {
 		g.Log().Error(err) // 输出log
+		return
 	}
+	backupToCOS(name, text)
+}
+
+func backupToCOS(name, text *string) {
+	if !g.Cfg().GetBool("database.backupCOS") {
+		return
+	}
+	path := "backup/" + *name
+	cos.StringUpload(&path, text)
 }

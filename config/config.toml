@@ -16,8 +16,12 @@
     type = "mysql"
     link = "test:test@tcp(127.0.0.1:3306)/blog_db"
     backup = true # 开启备份
-    backupPath = "./tmp" # 备份目录
-    backupCOS = true # 备份到COS
+    # 备份目录
+    backupPath = "./tmp"
+    # 备份到COS
+    backupCOS = true
+    # 定时任务表达式 https://goframe.org/pages/viewpage.action?pageId=30736411
+    backupCron = "0 0 3 * WED *"
 
 # Template.
 [viewer]

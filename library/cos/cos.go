@@ -1,10 +1,16 @@
 package cos
 
 import (
+	"context"
+	"fmt"
+	"net/http"
+	"net/url"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/gogf/gf/frame/g"
+	sdk "github.com/tencentyun/cos-go-sdk-v5"
 	sts "github.com/tencentyun/qcloud-cos-sts-sdk/go"
 )
 
@@ -28,6 +34,7 @@ func init() {
 
 	Option = getOpt()
 }
+
 // 配置项
 func getOpt() *sts.CredentialOptions {
 	return &sts.CredentialOptions{
@@ -61,4 +68,21 @@ func GetClient() *sts.Client {
 	)
 
 	return client
+}
+
+func getSdkClient() *sdk.Client {
+	u, _ := url.Parse(fmt.Sprintf("https://%s.cos.%s.myqcloud.com", bucket, region))
+	b := &sdk.BaseURL{BucketURL: u}
+	return sdk.NewClient(b, &http.Client{
+		Transport: &sdk.AuthorizationTransport{
+			SecretID:  secretID,  // 替换为用户的 SecretId，请登录访问管理控制台进行查看和管理，https://console.cloud.tencent.com/cam/capi
+			SecretKey: secretKey, // 替换为用户的 SecretKey，请登录访问管理控制台进行查看和管理，https://console.cloud.tencent.com/cam/capi
+		},
+	})
+}
+
+// 通过字符串上传对象到COS
+func StringUpload(name, text *string) (*sdk.Response, error) {
+	f := strings.NewReader(*text)
+	return getSdkClient().Object.Put(context.Background(), *name, f, nil)
 }

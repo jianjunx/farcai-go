@@ -14,6 +14,7 @@ import (
 func init() {
 	bindMysqlConf()
 	bindViewFunc()
+	backupClock()
 }
 
 func bindViewFunc() {
