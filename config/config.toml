@@ -15,7 +15,7 @@
 [database]
     type = "mysql"
     link = "test:test@tcp(127.0.0.1:3306)/blog_db"
-    backup = true # 开启备份
+    backup = false # 开启备份
     # 备份目录
     backupPath = "/tmp/logs"
     # 备份到COS

@@ -21,6 +21,8 @@ func init() {
 		group.POST("/login", api.User.Login)
 		// 文章搜索
 		group.GET("/post/search", api.Post.SearchPost)
+		// 备份数据库
+		group.GET("/backup/:secret", api.Assets.BackupDB)
 		// 认证中间件
 		group.Middleware(middleware.MiddlewareAuth)
 		// 获取用户信息
