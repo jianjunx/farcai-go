@@ -20,8 +20,8 @@
     backupPath = "/tmp/logs"
     # 备份到COS
     backupCOS = true
-    # 定时任务表达式 https://goframe.org/pages/viewpage.action?pageId=30736411
-    backupCron = "0 0 3 * WED *"
+    # 定时任务表达式 每周三 3点执行
+    backupCron = "0 3 * * WED"
 
 # Template.
 [viewer]

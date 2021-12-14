@@ -1,6 +1,7 @@
 module farcai-go
 
 require (
+	github.com/adhocore/gronx v0.2.6
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gogf/gf v1.16.6
